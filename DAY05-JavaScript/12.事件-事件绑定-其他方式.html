@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>11、JavaScript-事件-事件绑定</title>
+</head>
+
+<body>
+  <img src="images/off.png" alt=""> <br>
+  <button id="on_btn">开灯</button>
+  <button id="off_btn">关灯</button>
+</body>
+<script>
+  /*
+   方式二：通过 HTML标签中的事件属性进行绑定。语法是：on事件类型="绑定的函数()" 
+   方式三：通过 DOM 元素事件属性绑定。语法是：元素对象.on事件类型=funcaion(){}
+*/
+  let onBtn = document.querySelector('#on_btn');
+  //2 给元素绑定单击事件
+  // onBtn.addEventListener('click', () => {
+  //   //3 在事件函数中修改img标签的src属性
+  //   document.querySelector('img').src = 'images/on.gif'
+  // })
+//方式二：通过 HTML标签中的事件属性进行绑定。语法是：on事件类型="绑定的函数()" 
+// function on(){
+//   document.querySelector(`img`).src="images/on.png";
+// }
+// function off(){
+//   document.querySelector(`img`).src="images/off.png";
+// }
+// 方式三：通过 DOM 元素事件属性绑定。语法是：元素对象.on事件类型=funcaion(){}
+onBtn.onclick=function(){
+  document.querySelector(`img`).src="images/on.png";
+}
+offBtn.onclick=function(){
+  document.querySelector(`img`).src="images/off.png";
+}
+</script>
+
+</html>

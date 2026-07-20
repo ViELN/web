@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active {
+      color: red;
+      font-size: 35px;
+      font-family: '楷体';
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div id="sid">我爱中国</div>
+  <div class="cls">我爱黑马</div>
+  <div class="cls">我爱java</div>
+  <script>
+/* DOM操作步骤：
+      第一步：获取元素对象
+        1 根据CSS选择器来获取DoM元素，获取匹配到的第一个元素：document.querySelector('选择器')
+        2 根据CSS选择器来获取DOM元素，获取匹配到的所有元素：document.querySelectorAll('选择器')
+      第二步：通过元素对象操作标签的内容、属性、样式等
+        2 操作标签的样式
+          2.1 元素对象.style.样式属性=值;---适合设置少量的样式
+          2.2 元素对象.className=值;---通过设置标签的class属性值设置样式，适合设置大量样式
+          2.3 元素对象.classList.add/remove/toggle('类名');---通过设置标签的class属性值设置样式，适合设置大量样式【使用少】
+  */
+    //需求1：将第一个div的字体颜色设置为红色，字体大小设置为22px。
+    //1 根据CSS选择器来获取DoM元素，获取匹配到的第一个元素：document.querySelector('选择器')
+    let div=document.querySelector('#sid');
+    //2.1 元素对象.style.样式属性=值;---适合设置少量的样式
+    div.style.color="red";
+    div.style.fontSize="22px";
+
+     //需求2：将class='cls'的div样式设置为：红色，35px、楷体、加粗、下划线
+     let divs=document.querySelectorAll('.cls');
+     //遍历设置class='active'属性就使用上述的样式了
+     for(let i=0;i<divs.length;i++){
+      //2.2 元素对象.className=值;---通过设置标签的class属性值设置样式，适合设置大量样式
+      //  divs[i].className +=" active"; //追加active类名
+    //2.3 元素对象.classList.add/remove/toggle('类名');
+    divs[i].classList.add(`active`);//添加active类名
+    divs[i].classList.remove(`cls`);//移除cls类名
+    //divs[i].classList.toggle(`cls`);//切换类名：有cls类名就移除，没有就添加     
+    }
+
+  </script>
+
+  
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小米搜索框显示隐藏案例</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    ul {
+
+      list-style: none;
+    }
+
+    .mi {
+      position: relative;
+      width: 223px;
+      margin: 100px auto;
+    }
+
+    /* 搜索框样式 */
+    .mi .search-text {
+      width: 223px;
+      height: 48px;
+      padding: 0 10px;
+      font-size: 14px;
+      line-height: 48px;
+      /* border: 1px solid #ff6700; */
+      outline: none;
+    }
+
+    /* 下拉菜单 */
+    .result-list {
+      position: absolute;
+      left: 0;
+      top: 48px;
+      width: 223px;
+      border: 1px solid #ff6700;
+      border-top: 0;
+      background: #fff;
+      display: none;
+    }
+
+    .result-list a {
+      display: block;
+      padding: 6px 15px;
+      font-size: 12px;
+      color: #424242;
+      text-decoration: none;
+    }
+
+    .result-list a:hover {
+      background-color: #eee;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="mi">
+    <input type="search" placeholder="小米笔记本" class="search-text">
+    <ul class="result-list">
+      <li><a href="#">全部商品</a></li>
+      <li><a href="#">小米11</a></li>
+      <li><a href="#">小米10S</a></li>
+      <li><a href="#">小米笔记本</a></li>
+      <li><a href="#">小米手机</a></li>
+      <li><a href="#">黑鲨4</a></li>
+      <li><a href="#">空调</a></li>
+    </ul>
+  </div>
+  <script>
+    /*
+    需求：当表单得到焦点，显示下拉框，失去焦点隐藏下拉菜单
+    要求：
+        1 表单获得焦点 focus，则显示下拉框，并且搜索框变色（添加类）
+        2 表单失去焦点 blur，则隐藏下拉框，搜索框复原原来颜色
+    分析：
+        1 获取输入框和下拉框对象
+        2 给输入框绑定活得焦点(focus)和失去焦点(blur)事件
+        3 在绑定的函数中修改display样式控制下拉框的显示和隐藏
+        4 在绑定的函数中修改输入框的边框样式
+    */
+    //1 获取输入框和下拉框对象
+    let input=document.querySelector(`.search-text`)
+    let ul=document.querySelector(`.result-list`)
+    //2 给输入框绑定活得焦点(focus)和失去焦点(blur)事件
+    input.addEventListener(`focus`,function(){
+      //3 在绑定的函数中修改display样式控制下拉框的显示和隐藏
+      ul.style.display=`block`;//显示下拉框
+      input.style.border=`1px solid #ff6700`;//输入框边框变色
+
+    })
+    input.addEventListener(`blur`,function(){
+      //4 在绑定的函数中修改输入框的边框样式
+      ul.style.display=`none`;//隐藏下拉框
+      input.style.border=``;//输入框边框复原
+    })
+  
+
+    
+  </script>
+</body>
+
+</html>

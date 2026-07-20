@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="sid">我爱中国</div>
+  <div class="cls">我爱黑马</div>
+  <div class="cls">我爱黑马</div>
+  <script>
+  /* DOM操作步骤：
+    第一步：获取元素对象
+      根据CSS选择器来获取DoM元素，获取匹配到的第一个元素：document.querySelector('选择器')
+      根据CSS选择器来获取DOM元素，获取匹配到的所有元素：document.querySelectorAll('选择器')
+    第二步：通过元素对象操作标签的内容、属性、样式等
+    <div id="sid">我爱中国</div>
+    <div class="cls">我爱黑马</div>
+    <div class="cls">我爱黑马</div>
+  */
+  //1 根据CSS选择器来获取DoM元素，获取匹配到的第一个元素：document.querySelector('选择器')
+    // let sid=document.querySelector('#sid');
+    // console.log(sid);
+
+     //2 根据CSS选择器来获取DOM元素，获取匹配到的所有元素：document.querySelectorAll('选择器')
+    //  let cls=document.querySelectorAll('.cls');
+    //  console.log(cls);
+     //3 遍历数组，获取每个元素的内容
+    //  let divs=document.querySelectorAll('div');
+    //  for(let i=0;i<divs.length;i++){
+    //   console.log(divs[i]);
+    //  }
+
+     //3 document.getElementById(id值)：根据id获取元素对象【了解】
+     let div=document.getElementById('sid');
+     console.log(div);
+
+
+ 
+  </script>
+  
+</body>
+</html>

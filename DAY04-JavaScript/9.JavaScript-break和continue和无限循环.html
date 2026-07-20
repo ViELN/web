@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      break和continue关键字
+        break：在循环或者switch中使用，表示结束循环或者switch分支。
+        continue：只能在循环语句中使用，表示跳过本次循环，继续下一次循环。
+      死循环：一直执行，在没有认为干预的情况下无法结束的循环。
+        while(true){}
+        for(;;){}
+    */
+   //break和continue关键字
+   for(let i=0;i<10;i++){
+    if(i==7){
+      break;//结束循环，不执行后续代码
+    }if(i%3==0){
+      continue;//跳过本次循环，继续下一次循环
+    }
+    document.write(i);
+   }  document.write('<br>');
+  /*  //死循环
+   while(true){
+    console.log('hello world<br>');
+   }
+   console.log('<br>');
+   for(;;){
+   console.log('hello world<br>');
+   } */
+  </script>
+  
+</body>
+</html>

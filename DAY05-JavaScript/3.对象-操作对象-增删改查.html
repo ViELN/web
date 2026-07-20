@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      操作对象-增删改查
+          1. 增：
+            添加属性：对象名.属性名 = 属性值;
+            添加方法：对象名.方法名 = function(参数列表){
+              方法体
+              return 结果; //如果有的话就返回
+            }
+          2. 删：delete 对象名.属性名;
+          3. 改：对象名.属性名 = 属性值;
+          4. 查：对象名.属性名;
+          //说明：新增属性和修改属性语法一样，如果属性在对象存值就是修改，不存在就是添加。
+    */
+    let pigGod={//定义一个对象，保存一个人的信息
+      name:"皮嘎的",//姓名
+      age:4,//年龄
+      gender:"神本无相",//性别
+      heigth:1.2,//身高
+      weight:70,//体重
+    }
+    //添加属性：对象名.属性名 = 属性值;
+    pigGod.address=["中国","北京","东城区"];
+    console.log(pigGod);
+
+    /*
+    添加方法：对象名.方法名 = function(参数列表){
+            方法体
+            return 结果; //如果有的话就返回
+          }
+     */
+    pigGod.study=function(subject){
+      console.log(`我是${this.name}，我正在学习${subject}`);//输出学习的信息
+    }
+    pigGod.study("JavaScript");//调用study方法，传递参数"JavaScript"
+
+//2. 删：delete 对象名.属性名;
+    delete pigGod.weight;
+    console.log(pigGod);
+
+
+//3. 改：对象名.属性名 = 属性值;
+    pigGod.age=5;
+    console.log(pigGod);
+
+ //4. 查：对象名.属性名;
+    console.log(pigGod.name,pigGod.age,pigGod.gender);
+           </script>
+
+  
+</body>
+</html>

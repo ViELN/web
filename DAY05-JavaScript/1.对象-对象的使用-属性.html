@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+  对象：封装一个事物的数据（属性和行为方法）
+  定义对象：
+    let 对象名 = {
+      属性名1:属性值1,
+      属性名2:属性值2,
+      ...
+      属性名n:属性值n
+    }
+  访问对象中的属性：
+    获取值：对象名.属性名
+    设置值：对象名.属性名 = 新值
+*/
+//需求：定义一个对象，保存一个人的信息(姓名、年龄、性别、身高、体重)
+    let pigGod={//定义一个对象，保存一个人的信息
+      name:"皮嘎的",//姓名
+      age:4,//年龄
+      gender:"神本无相",//性别
+      heigth:1.2,//身高
+      weight:70//体重
+    }
+    console.log(pigGod);//皮嘎的
+    console.log(pigGod.age,pigGod.gender,pigGod.heigth,pigGod.weight);//4 神本无相 1.2 70
+
+    pigGod.age=5;//将年龄设置为5
+    console.log(pigGod);
+    console.log(pigGod.age,pigGod.gender,pigGod.heigth,pigGod.weight);//5 神本无相 1.2 70
+
+  </script>
+</body>
+</html>

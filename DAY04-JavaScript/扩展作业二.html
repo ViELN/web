@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 需求： 定义一个函数，接收一个字符串，统计字符串中大写字母的个数并返回（例如输入"HelloWorld"，返回2）。
+    let str=prompt("请输入一个字符串");//获取用户输入的字符串
+    function count(str){ //定义一个函数，接收一个字符串，统计字符串中大写字母的个数并返回
+      let count =0;//定义一个变量，用于统计大写字母的个数
+      for(let i=0 ;i<str.length;i++){//遍历字符串中的每个字符
+        let ch=str[i];//获取当前字符
+        if(ch>=`A`&&ch<=`Z`){//如果当前字符是大写字母
+          count++;//统计大写字母的个数
+        }
+      }
+      return count;//返回大写字母的个数
+    }
+    let res=count(str);//调用函数，统计字符串中大写字母的个数
+    console.log(`${str}中大写字母的个数为${res}`);//输出结果
+    
+  </script>
+</body>
+</html>

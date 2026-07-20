@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Axios-请求别名</title>
+</head>
+
+<body>
+  <div id="demo"></div>
+  <button type="button" onclick="load()">获取数据</button>
+  <!-- 第一步：引入axios的js文件 -->
+  <script src="js/axios.min.js"></script>
+  <script>
+  /* 
+    axios:是一个封装了ajax技术的工具，使用该工具发送异步请求访问服务器获取数据代码相对简单。
+    使用步骤：
+      第一步：引入axios的js文件
+      第二步：使用axios相关方法发送异步请求
+    请求别名的方式发送异步请求：
+      axios.get(url路径).then((res)=>{...}).catch((err)=>{...})
+      axios.post(url路径).then((res)=>{...}).catch((err)=>{...})
+      说明：在开发中catch((err)=>{...})这一部分在此处不写，将来统一处理错误。所有发送请求的代码如下:
+      axios.get(url路径).then((res)=>{...})
+      axios.post(url路径).then((res)=>{...})
+  */
+    function load() {
+    /*   //axios.get(url路径).then((res)=>{...}).catch((err)=>{...})
+      axios.get("http://hmajax.itheima.net/api/province").then((res)=>{
+        console.log(res.data);
+        document.querySelector("#demo").innerHTML = res.data.list;
+      }) */
+     //axios.post(url路径).then((res)=>{...}).catch((err)=>{...})
+   /*    axios.post("http://hmajax.itheima.net/api/province").then((res)=>{
+        console.log(res.data);
+        document.querySelector("#demo").innerHTML = res.data.list;
+      }) */
+    }
+  </script>
+</body>
+
+</html>

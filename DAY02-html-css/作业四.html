@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学员信息登记</title>
+  <style>
+    /* 全局样式重置：清除所有元素默认边距和内边距，统一盒模型 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* 页面主体样式：设置背景色、内边距和字体 */
+    body {
+      padding: 30px;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    /* 表单容器样式：白色背景、居中、圆角和阴影效果 */
+    .form-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    /* 表单项样式：flex布局，标签和输入控件水平排列 */
+    .form-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    /* 标签样式：固定宽度80px，灰色文字 */
+    .form-item label {
+      width: 80px;
+      font-size: 14px;
+      color: #666;
+      padding-top: 8px;
+      flex-shrink: 0;
+    }
+
+    /* 文本输入框、数字输入框和下拉选择框样式 */
+    .form-item input[type="text"],
+    .form-item input[type="number"],
+    .form-item select {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      background-color: #fafafa;
+      outline: none;
+    }
+
+    /* 输入框聚焦状态样式：蓝色边框，白色背景 */
+    .form-item input[type="text"]:focus,
+    .form-item input[type="number"]:focus,
+    .form-item select:focus {
+      border-color: #4a90d9;
+      background-color: white;
+    }
+
+    /* 单选按钮样式：调整间距 */
+    .form-item input[type="radio"] {
+      margin-right: 6px;
+      margin-top: 8px;
+    }
+
+    /* 单选按钮组样式：水平排列 */
+    .form-item .radio-group {
+      display: flex;
+      gap: 20px;
+      padding-top: 2px;
+    }
+
+    /* 文本域样式 */
+    .form-item textarea {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      background-color: #fafafa;
+      outline: none;
+      resize: none;
+      font-family: inherit;
+    }
+
+    /* 文本域聚焦状态样式 */
+    .form-item textarea:focus {
+      border-color: #4a90d9;
+      background-color: white;
+    }
+
+    /* 备注输入框样式：底部内边距增加，给字符计数留出空间 */
+    .form-item.remark-item textarea {
+      padding-bottom: 30px;
+    }
+
+    /* 字符计数提示样式：定位在输入框内部右下角 */
+    .form-item .char-count {
+      position: absolute;
+      right: 14px;
+      bottom: 8px;
+      font-size: 12px;
+      color: #999;
+      pointer-events: none;
+    }
+
+    /* 备注项相对定位，用于字符计数的绝对定位 */
+    .form-item.remark-item {
+      position: relative;
+    }
+
+    /* 按钮组样式：flex布局，右对齐 */
+    .btn-group {
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    /* 重置按钮样式：灰色背景，圆角 */
+    .btn-reset {
+      padding: 10px 30px;
+      background-color: #e0e0e0;
+      color: #666;
+      border: none;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    /* 重置按钮悬停效果 */
+    .btn-reset:hover {
+      background-color: #d0d0d0;
+    }
+
+    /* 提交按钮样式：绿色背景，白色文字，圆角 */
+    .btn-submit {
+      padding: 10px 30px;
+      background-color: #00c853;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    /* 提交按钮悬停效果 */
+    .btn-submit:hover {
+      background-color: #00b843;
+    }
+  </style>
+</head>
+<body>
+  <!-- 表单容器 -->
+  <div class="form-container">
+    <!-- 表单开始 -->
+    <form action="">
+      <!-- 姓名字段 -->
+      <div class="form-item">
+        <label for="username">姓名</label>
+        <input type="text" placeholder="请输入客户姓名" id="username" name="username">
+      </div>
+
+      <!-- 手机号字段 -->
+      <div class="form-item">
+        <label for="phone">手机</label>
+        <input type="text" placeholder="请输入手机号" id="phone" name="phone">
+      </div>
+
+      <!-- 性别字段（单选按钮组） -->
+      <div class="form-item">
+        <label>性别</label>
+        <div class="radio-group">
+          <label><input type="radio" value="男" name="gender">男</label>
+          <label><input type="radio" value="女" name="gender">女</label>
+          <label><input type="radio" value="未知" name="gender">未知</label>
+        </div>
+      </div>
+
+      <!-- 年龄字段 -->
+      <div class="form-item">
+        <label for="years">年龄</label>
+        <input type="number" placeholder="请输入年龄" id="years" name="years">
+      </div>
+
+      <!-- QQ字段 -->
+      <div class="form-item">
+        <label for="QQ">QQ</label>
+        <input type="text" placeholder="请输入qq" id="QQ" name="QQ">
+      </div>
+
+      <!-- 学科选择字段 -->
+      <div class="form-item">
+        <label for="subject">学科</label>
+        <select name="subject" id="subject">
+          <option value="">请选择意向学科</option>
+          <option value="AI智能应用">AI智能应用</option>
+          <option value="AI大模型">AI大模型</option>
+          <option value="AI运维">AI运维</option>
+          <option value="AI测试">AI测试</option>
+          <option value="大数据">大数据</option>
+        </select>
+      </div>
+
+      <!-- 渠道来源字段 -->
+      <div class="form-item">
+        <label for="channel">渠道</label>
+        <select name="channel" id="channel">
+          <option value="">请选择渠道来源</option>
+          <option value="线上活动">线上活动</option>
+          <option value="推广介绍">推广介绍</option>
+        </select>
+      </div>
+
+      <!-- 备注字段（带字符计数） -->
+      <div class="form-item remark-item">
+        <label for="remark">备注</label>
+        <textarea name="remark" id="remark" cols="30" rows="4" placeholder="请输入备注" maxlength="20"></textarea>
+        <span class="char-count">0/20</span>
+      </div>
+
+      <!-- 按钮组 -->
+      <div class="btn-group">
+        <button type="reset" class="btn-reset">重置</button>
+        <button type="submit" class="btn-submit">提交</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // 字符计数功能：实时更新备注输入框的字符数
+    const remarkTextarea = document.getElementById('remark');
+    const charCount = document.querySelector('.char-count');
+
+    // 监听输入事件
+    remarkTextarea.addEventListener('input', function() {
+      // 获取当前输入字符数
+      const currentLength = this.value.length;
+      // 更新字符计数显示
+      charCount.textContent = currentLength + '/20';
+    });
+  </script>
+</body>
+</html>

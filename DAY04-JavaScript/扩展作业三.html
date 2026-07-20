@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 需求： 定义一个函数，接收一个字符串，统计字符串中英文字母的个数并返回（例如输入"HelloWorld"，返回10）。
+    //方法一：使用for循环遍历字符串中的每个字符，判断是否是英文字母，如果是，统计英文字母的个数
+    /* let str=prompt("请输入一个字符串");//获取用户输入的字符串
+    function letter() {
+      let count=0;//定义一个变量，用于统计英文字母的个数
+      for(let i=0;i<str.length;i++){
+        let ch=str[i];//获取当前字符
+        if(ch>`a`&&ch<`z`||ch>`A`&&ch<`Z`){//如果当前字符是英文字母
+          count++;//统计英文字母的个数
+        }
+      }
+      return count;//返回英文字母的个数
+    }
+    function space() {
+      let count=0;//定义一个变量，用于统计空格的个数
+      for(let i=0;i<str.length;i++){
+        let sp=str[i];//获取当前字符
+        if(sp==` `){//如果当前字符是空格
+          count++;//统计空格的个数
+        }
+      }
+      return count;//返回空格的个数
+    }
+    function number(){
+      let count=0;//定义一个变量，用于统计数字的个数
+      for(let i=0;i<str.length;i++){
+        let num=str[i];//获取当前字符
+        if(num>`0`&&num<`9`){//如果当前字符是数字
+          count++;//统计数字的个数
+        }
+      }  return count;//返回数字的个数
+    }
+    
+      function other(){
+        count=0;//定义一个变量，用于统计其它字符的个数
+        for(let i=0;i<str.length;i++){
+          let ot=str[i];//获取当前字符
+          // 检查是否是有效字符（字母、数字、非空）
+          if (ot >= 'a' && ot <= 'z' || ot >= 'A' && ot <= 'Z' ||ot >= '0' && ot <= '9' ||ot === ' ') { //如果当前字符不是英文字母、数字、空格
+            }else{
+              count++;//统计其它字符的个数
+            }
+          
+        }
+        return count;//返回其它字符的个数
+      }
+      console.log(`${str}中英文字母的个数为${letter()}，数字的个数为${number()}，空格的个数为${space()}，其它字符的个数为${other()}`);//输出结果 */
+
+// 需求： 定义一个函数，接收一个字符串，统计字符串中英文字母的个数并返回（例如输入"HelloWorld"，返回10）。
+//方法二：使用for循环遍历字符串中的每个字符，判断是否是英文字母、数字、空格、其它字符，如果是，统计英文字母、数字、空格、其它字符的个数
+    let str=prompt("请输入一个字符串");//获取用户输入的字符串
+    function strCount(str){
+      let count=0;//定义一个变量，用于统计英文字母的个数
+      let num=0;//定义一个变量，用于统计数字的个数
+      let space=0;//定义一个变量，用于统计空格的个数
+      let other=0;//定义一个变量，用于统计其它字符的个数
+      for(let i=0;i<str.length;i++){
+        let ch=str[i];//获取当前字符
+        if(ch>`a`&&ch<`z`||ch>`A`&&ch<`Z`){//如果当前字符是英文字母
+          count++;//统计英文字母的个数
+        }else if(ch>`0`&&ch<`9`){//如果当前字符是数字
+          num++;//统计数字的个数
+        }else if(ch===` `){
+          space++;//统计空格的个数
+        }else{
+          other++;//统计其它字符的个数  
+        }
+        
+      }
+      return {count,num,space,other};//返回英文字母、数字、空格、其它字符的个数
+    }
+    let res=strCount(str);//调用函数，统计字符串中英文字母、数字、空格、其它字符的个数
+    console.log(`${str}中英文字母的个数为${res.count}，数字的个数为${res.num}，空格的个数为${res.space}，其它字符的个数为${res.other}`);//输出结果
+
+
+
+
+
+
+  </script>
+
+  
+</body>
+</html>

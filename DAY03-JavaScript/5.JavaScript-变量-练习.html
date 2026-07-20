@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 需求：
+        1、有2个变量：apple 里面放的是'苹果汁'，orange 里面放的是'橙子汁'
+        2、经过处理，最后 apple 里面放的是'橙子汁'，orange 里面放的是'苹果汁'
+    */
+    // 1、定义变量
+    let apple = '苹果汁';
+    let orange = '橙子汁';
+    console.log("交换前：" ,apple ,orange);
+    // 2、处理变量
+    let temp = apple;
+    apple = orange;
+    orange = temp;
+    // 3、输出结果
+    console.log("交换后：" ,apple ,orange);
+  </script>
+
+  
+</body>
+</html>

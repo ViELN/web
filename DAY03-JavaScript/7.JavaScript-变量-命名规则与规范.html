@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+      变量的命名规则和规范
+        规则：必须遵守，否则报错。(法律层面)
+          1、变量名只能包含字母、数字、下划线(_)和美元符号($)。
+          2、变量名不能以数字开头,不能是关键字
+            关键字：JavaScript自身用到的具有特殊含义的英语单词就叫关键字，例如：let、if、for...
+          3、变量名区分大小写，例如：age和Age是两个不同的变量。
+        规范：建议遵守，不遵守不会报错，但不符合业内通识(道德层面）
+          1、变量名要见名知意。
+          2、变量名如果由多个单词组成，建议遵守小驼峰命名法。
+            小驼峰命名法：第一个单词的首字母小写，后面每个单词的首字母大写。
+            例如：let myAge = 18;
+    */
+   let myAge = 18;
+   let age = 18;
+   let _age = 18;
+   let $age = 18;
+   let a_age = 18;
+   console.log(a_age,myAge,age,_age,$age);
+   
+  </script>
+</body>
+</html>

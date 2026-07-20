@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    需求:
+        1 有2个变量:apple 里面放的是‘苹果汁'，orange 里面放的是‘橙子汁'
+        2、经过处理，最后 apple 里面放的是'橙子汁'orange里面放的是'苹果汁'
+    */
+   /*
+   分析:
+        1、定义两个变量apple和orange，初始值分别是苹果汁'和'橙子汁!
+        2、定义一个临时变量temp，将apple的值赋值给temp保存
+        3、将orange变量的值赋值给apple
+        4、将temp的值赋值给orange
+        5、打印apple 和 orange 的值 
+   */
+  //1、定义两个变量apple和orange，初始值分别是苹果汁'和'橙子汁!
+  let apple = '苹果汁';
+  let orange = '橙子汁';
+  //2、定义一个临时变量temp，将apple的值赋值给temp保存
+  let temp = apple;
+  //3、将orange变量的值赋值给apple
+  apple = orange;
+  //4、将temp的值赋值给orange
+  orange = temp;
+  //5、打印apple 和 orange 的值 
+  console.log("交换后：",apple,orange);
+
+  </script>
+
+  
+</body>
+</html>

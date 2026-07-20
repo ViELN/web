@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例1-查询所有省份信息</title>
+    <link rel="stylesheet" href="./lib/css/bootstrap.min.css">
+    <style>
+        .input-group {
+            width: 500px;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="input-group mb-3">
+            <label class="input-group-text">籍贯</label>
+            <select class="form-select" id="province">
+                <option selected>请选择省份</option>
+            </select>
+            <select class="form-select" id="city">
+                <option selected>请选择城市</option>
+            </select>
+            <select class="form-select" id="area">
+                <option selected>请选择区/县</option>
+            </select>
+        </div>
+    </div>
+
+    <script src="./lib/js/bootstrap.bundle.min.js"></script>
+    <script src="./lib/js/axios.min.js"></script>
+    <script>
+        /* 
+        获取省份列表：
+        1.发送请求获取省份信息：
+        接口：get：https://hmajax.itheima.net/api/province
+        请求参数：无
+        响应数据：省份列表
+        2.获取省份信息并遍历，将遍历得到的信息拼接到省份下拉列表中，有多少个省份，就拼接多少个option标签
+        3.将拼接好的option标签添加在select标签中
+        
+     
+
+        */
+        /* 
+        获取省份列表：
+        1.发送请求获取省份信息：
+        接口：get：https://hmajax.itheima.net/api/province
+        请求参数：无
+        响应数据：省份列表
+        2.获取省份信息并遍历，将遍历得到的信息拼接到省份下拉列表中，有多少个省份，就拼接多少个option标签
+        3.将拼接好的option标签添加在select标签中
+        */
+        axios.get('https://hmajax.itheima.net/api/province')
+        .then(result => {
+            // 获取省份列表数据
+            const provinceList = result.data.list
+            // 遍历省份列表，拼接option标签
+            let provinceOptions = ''
+            for (let i = 0; i < provinceList.length; i++) {
+                provinceOptions += `<option value="${provinceList[i]}">${provinceList[i]}</option>`
+            }
+            // 将拼接好的option标签添加到省份select中
+            document.querySelector('#province').insertAdjacentHTML('beforeend', provinceOptions)
+        })
+        //------------需求：发送请求获取所有省份信息------------------
+
+        //------------需求：获取指定省份下的城市信息------------------
+
+        //------------需求：获取指定城市下的区或者县信息---------------
+
+    </script>
+</body>
+
+</html>

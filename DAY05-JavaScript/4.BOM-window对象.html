@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+/* 
+  window对象：浏览器窗口对象，使用的时候window.可以省略不写。
+  常用方法：
+    alert（‘警告信息’）：显示带有一段消息和一个确认按钮的警告框。
+    confirm（‘确认信息'）：显示带有一段消息以及确认按钮和取消按钮的对话框。
+    setTimeout（匿名函数,等待的毫秒）：在指定的毫秒数后调用函数（一次性定时器）。
+    setInterval（匿名函数,等待的毫秒）：按照指定的周期(以毫秒计)来调用函数（循环定时器）。
+*/
+      //1 alert（‘警告信息’）：显示带有一段消息和一个确认按钮的警告框。
+      // alert("警告信息");
+
+      //2 confirm（‘确认信息'）：显示带有一段消息以及确认按钮和取消按钮的对话框。
+/*       let isDelete = confirm("确定删除吗？");
+      console.log(isDelete);//true或false
+    //根据用户是否点击了确认按钮，执行不同的操作
+    if(isDelete){
+      alert("删除成功");
+    }else{
+      alert("删除失败");
+    } */
+
+    //3 setTimeout（匿名函数,等待的毫秒）：在指定的毫秒数后调用函数（一次性定时器）。
+    let time1 = setTimeout(() => {
+      console.log("2秒后执行");
+    }, 2000);//2秒后执行
+    //4 setInterval（匿名函数,等待的毫秒）：按照指定的周期(以毫秒计)来调用函数（循环定时器）。
+    let time2 = setInterval(() => {
+      console.log("2秒执行一次");
+    }, 2000);//2秒执行一次
+
+    //5 clearTimeout（定时器ID）：清除指定的定时器（一次性定时器）。
+    clearTimeout(time1);//清除2秒后执行的定时器
+    //6 clearInterval（定时器ID）：清除指定的定时器（循环定时器）。
+    clearInterval(time2);//清除2秒执行一次的定时器
+
+  </script>
+</body>
+</html>

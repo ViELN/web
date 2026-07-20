@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      switch分支结构：通过比较表达式的结果和哪个case后面的值相等，就执行哪个case中的语句。
+      语法：
+        switch(表达式){  //表达式可以是一个变量，也可以是一个做运算的表达式
+          case 值1:
+            语句1;
+            break;  //结束分支，后面的都不执行
+          case 值2:
+            语句2;
+            break;
+          ...
+          default:
+            语句3;  
+        }
+      执行流程：
+        1 先判断表达式的结果和哪个case后面的值全等，就执行哪个case中的代码，遇到break结束分支。
+        2 如果表达式的结果和所有case后面的值都不全等，那就执行default中的代码。
+      注意事项：
+        注意1：witch语句适用于等值判断，if适合于区间范围判断。
+        注意2：witch一般需要配合break关键字使用，没有break会造成case穿透。
+          case穿透：执行当前case中的代码后，如果没有break关键字，会直接执行下一个case中的代码，直到遇到break终止。
+          case穿透作用：当多个case中的代码一样时，可以只写一份，然后利用case穿透实现执行同一份代码。
+      需求：用户输入当天是周几，程序输出这一天的工作计划，如下图所示。
+          周一：埋头苦干，解决bug
+          周二：请求大牛程序员帮忙
+          周三：请求大牛程序员帮忙
+          周四：请求大牛程序员帮忙
+          周五：自己整理代码
+          周六：打游戏
+          周日：打游戏
+    */
+    let week = prompt('请输入当天是周几');
+    switch (week) {
+      case '周一':
+        alert('埋头苦干，解决bug');
+        break;
+        //case穿透
+      case '周二':
+      case '周三':
+      case '周四':
+        alert('请求大牛程序员帮忙');
+        break;
+      case '周五':
+        alert('自己整理代码');
+        break;
+      case '周六':
+      case '周日':
+        alert('打游戏');
+        break;
+      default:
+        alert('输入错误');
+        break;
+    }
+
+  </script>
+
+  
+</body>
+</html>

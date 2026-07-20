@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      需求：用户可以选择存钱、取钱、查看余额和退出功能
+      分析：
+        1、定义变量balance表示账户余额
+        2、while死循环打印菜单信息
+        3、在循环中并获取用户的选择
+        4、使用switch判断用户的选择
+        5、根据不同的选择，做不同的操作
+          5.1、取钱则是减法操作，存钱则是加法操作，查看余额则是直接显示余额。
+          5.2、选择4或者点击取消按钮则表示退出系统
+    */
+ /*   //方法一：
+   //1、定义变量balance表示账户余额
+   function init(){//使用方法，从而使用return
+     let balance = 0;
+    //  2、while死循环打印菜单信息
+     while(true){
+      //3、在循环中并获取用户的选择
+      let choose =prompt(`请选择您的操作；1.存钱 2.取钱 3.查看余额 4.退出`)
+      //4、使用switch判断用户的选择
+      switch (choose) {
+        case `1`://因为键盘打出的是字符串，所以要使用`1`表示字符串
+          console.log(`1.存钱`);
+          break;
+        case `2`:
+          console.log(`2.取钱`);
+          break;
+        case `3`:
+          console.log(`3.查看余额`);
+          break;
+        case `4`:
+          console.log(`4.退出系统`);
+          alert(`感谢使用，已退出系统`);
+          return; //结束方法
+      
+        default:
+          console.log(`您输入的操作有误`);
+          break;
+      }
+     }
+   }
+   //执行方法，开启程序
+   init();
+ */
+//方法二：
+//1、定义变量balance表示账户余额
+let balance = 0;
+// 2、while死循环打印菜单信息
+while(true){
+  //3、在循环中并获取用户的选择
+  let choose =prompt(`请选择您的操作；1.存钱 2.取钱 3.查看余额 4.退出`)
+  let itExit = false;
+  let money = 0;
+  //4、使用switch判断用户的选择
+  switch (choose) {
+    case `1`://因为键盘打出的是字符串，所以要使用`1`表示字符串
+      money =Number(prompt(`请输入您要存钱的金额`));
+      if(money<=0){
+        alert(`您输入的金额有误`);
+        continue;
+      }
+      balance+=money;
+      alert(`您存了${money}元，当前余额为${balance}元`);
+      break;
+    case `2`:
+      money=Number(prompt(`请输入您要取钱的金额`));
+      if(money<=0){
+        alert(`您输入的金额有误`);
+        continue;
+      }
+      if(money>balance){
+        alert(`您余额不足`);
+        continue;
+      }
+      balance-=money;
+      alert(`您取了${money}元，当前余额为${balance}元`);
+      break;
+    case `3`:
+      alert(`您的余额为${balance}元`);
+      break;
+    case `4`:
+      console.log(`4.退出系统`);
+      alert(`感谢使用，已退出系统`);
+      itExit = true;
+      break;
+
+    default:
+      console.log(`您输入的操作有误`);
+      break;
+  }
+  if(itExit){
+    break;
+  }
+}
+
+  </script>
+</body>
+</html>

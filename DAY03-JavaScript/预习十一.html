@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    显示类型转换：己手动写代码告诉系统该转成什么类型（数据类型明确、程序员主导）
+    其他类型转数字类型（number)：
+    Number（数据）：转换成功返回一个数字类型。转换失败则返回NaN（例如数据里面包含非数字）。
+    parseInt(数据）：只保留整数。如果数字开头的字符串，只保留整数数字比如12p×返回12。
+    parseFloat(数据）：可以保留小数。如果数字开头的字符串，可以保留小数比如12.5px返回12.5。 
+    其他类型转字符串类型（string）：
+    String（数据）：转换为字符串类型。
+    其他类型转布尔类型(boolean）：
+    Boolean（数据）：转换为布尔类型。
+    */
+   //Number（数据）：转换成功返回一个数字类型。转换失败则返回NaN（例如数据里面包含非数字）。
+   let a1 = Number('10');
+   console.log(a1,typeof a1);
+   console.log("-----------------");
+
+   // parseInt(数据）：只保留整数。如果数字开头的字符串，只保留整数数字比如12p×返回12。
+   a1 = parseInt('12p×');
+   console.log(a1,typeof a1);
+   console.log("-----------------");
+
+   // parseFloat(数据）：可以保留小数。如果数字开头的字符串，可以保留小数比如12.5px返回12.5。 
+   a1 = parseFloat('12.5px');
+   console.log(a1,typeof a1);
+   console.log("-----------------");
+
+   //布尔型转换为数字：true为1，false为0。null转换为数字0，undefined转换为数字类型的NaN。
+   a1 = Number(true);
+   console.log(a1,typeof a1);
+   console.log("-----------------");
+
+   a1 = Number(false);
+   console.log(a1,typeof a1);
+   console.log("-----------------");
+
+   a1 = Number(null);
+   console.log(a1,typeof a1);
+   console.log("-----------------");
+
+   a1 = Number(undefined);
+   console.log(a1,typeof a1);
+   console.log("-----------------");
+
+
+   //String（数据）：转换为字符串类型。
+   a1 = String(10);
+   console.log(a1,typeof a1);
+   console.log("-----------------");
+   a1 = String('hello');
+   console.log(a1,typeof a1);
+   console.log("-----------------");
+
+   //Boolean（数据）：转换为布尔类型。
+   //说明：数字类型的o或者NaN转换成false，·、null、undefined转换成false，其他的都转换成true。
+   a1 = Boolean(10);
+   console.log(a1,typeof a1);
+   console.log("-----------------");
+
+   a1 = Boolean(0);
+   console.log(a1,typeof a1);
+   console.log("-----------------");
+
+   a1 = Boolean(NaN);
+   console.log(a1,typeof a1);
+   console.log("-----------------");
+
+   a1 = Boolean('');
+   console.log(a1,typeof a1);
+   console.log("-----------------");
+
+
+
+   
+  </script>
+    
+</body>
+</html>

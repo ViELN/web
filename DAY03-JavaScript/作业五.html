@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1、输入一个秒数，将其转换为时分秒格式。
+    let num = prompt('请输入一个数字');//7280
+    // 2、将秒数转换为分钟数。
+    let minute = parseInt(num/60);
+    //余数作为秒数
+    let second = num%60;
+    // 3、将分钟数转换为小时数。
+    let hour = parseInt(minute/60);
+    //余数作为分钟数
+    minute = minute%60;
+    console.log(`${hour}时${minute}分${second}秒`);
+    
+  </script>
+
+  
+</body>
+</html>

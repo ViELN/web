@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>课程信息管理系统</title>
+  <style>
+    /* 全局选择器：清除默认边距和内边距 */
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 页面容器：占屏幕宽度80%，水平居中 */
+    .container {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    /* 顶栏样式 */
+    .top-bar {
+      background-color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* 标题样式：居中加粗，楷体，黑色，35px */
+    .top-bar .title {
+      font-size: 35px;
+      font-weight: bold;
+      font-family: "KaiTi", "STKaiti", serif;
+      color: black;
+      letter-spacing: 2px;  /* 加大文字间的间隙 */
+    }
+
+    /* 搜索表单区域样式 */
+    .search-form {
+      background-color: white;
+      padding: 20px;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    /* 表单输入区域容器 */
+    .search-form .input-group {
+      display: flex;
+      flex: 1;
+      gap: 15px;
+    }
+
+    /* 单个表单项样式 */
+    .search-form .form-item {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    /* 表单项标签样式 */
+    .search-form .form-item label {
+      width: 80px;
+      font-size: 14px;
+      color: #333;
+      margin-right: 8px;
+    }
+
+    /* 文本输入框和下拉选择框样式 */
+    .search-form .form-item input,
+    .search-form .form-item select {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    /* 按钮容器样式 */
+    .search-form .btn-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* 查询按钮样式 */
+    .search-form .btn-search {
+      padding: 8px 20px;
+      background-color: #1E98D7;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    /* 清空按钮样式 */
+    .search-form .btn-reset {
+      padding: 8px 20px;
+      background-color: #7F7F7F;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    /* 表格展示区样式 */
+    .table-section {
+      width: 80%;
+      margin: 20px auto 0;
+      overflow-x: auto;
+    }
+
+    /* 表格样式 */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    /* 表头单元格样式 */
+    .data-table th {
+      background-color: #81D3F8;
+      color: black;
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    /* 表格数据单元格样式 */
+    .data-table td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    /* 表格行悬停效果 */
+    .data-table tbody tr:hover {
+      background-color: #f5f5f5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 顶栏区域 -->
+    <div class="top-bar">
+      <span class="title">课程信息管理系统</span>
+    </div>
+
+    <!-- 搜索表单区域 -->
+    <div class="search-form">
+      <div class="input-group">
+        <!-- 课程学科下拉选择 -->
+        <div class="form-item">
+          <label for="subject">课程学科</label>
+          <select id="subject">
+            <option value="">请选择</option>
+            <option value="java">AI智能体应用开发（java）</option>
+            <option value="python">AI大模型开发（python）</option>
+            <option value="hongmeng">AI鸿蒙开发</option>
+            <option value="bigdata">AI大数据</option>
+            <option value="embedded">AI嵌入式</option>
+            <option value="test">AI测试</option>
+            <option value="ops">AI运维</option>
+          </select>
+        </div>
+        <!-- 名称文本输入框 -->
+        <div class="form-item">
+          <label for="name">名称</label>
+          <input type="text" id="name" placeholder="请输入姓名">
+        </div>
+        <!-- 适用人群下拉选择 -->
+        <div class="form-item">
+          <label for="audience">适用人群</label>
+          <select id="audience">
+            <option value="">请选择</option>
+            <option value="beginner">小白学员</option>
+            <option value="junior">初级程序员</option>
+            <option value="intermediate">中级程序员</option>
+          </select>
+        </div>
+      </div>
+      <!-- 按钮区域 -->
+        <div class="btn-group">
+          <button class="btn-search">查询</button>
+          <button class="btn-reset">清空</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 表格展示区 -->
+    <div class="table-section">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>课程学科</th>
+            <th>课程名称</th>
+            <th>价格(元)</th>
+            <th>适用人群</th>
+            <th>课程介绍</th>
+            <th>更新时间</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>AI智能体应用开发(Java)</td>
+            <td>AI智能体项目-天机AI助理</td>
+            <td>4999</td>
+            <td>中级程序员</td>
+            <td>AI智能体项目-天机AI助理</td>
+            <td>2025-07-10 12:05:30</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>AI智能体应用开发(Java)</td>
+            <td>微服务智能项目集</td>
+            <td>1999</td>
+            <td>中级程序员</td>
+            <td>微服务智能项目集</td>
+            <td>2025-07-10 12:05:30</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>AI智能体应用开发(Java)</td>
+            <td>微服务智能框架集</td>
+            <td>1200</td>
+            <td>中级程序员</td>
+            <td>微服务智能框架及分布式解决方案</td>
+            <td>2025-07-10 12:05:30</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>AI智能体应用开发(Java)</td>
+            <td>SpringCloud微服务框架</td>
+            <td>1200</td>
+            <td>初级程序员</td>
+            <td>SpringCloud微服务框架及分布式解决方案</td>
+            <td>2025-07-10 12:05:30</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>AI智能体应用开发(Java)</td>
+            <td>RAG增强检索</td>
+            <td>999</td>
+            <td>初级程序员</td>
+            <td>RAG</td>
+            <td>2025-07-10 12:05:30</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>AI智能体应用开发(Java)</td>
+            <td>LangChain4j</td>
+            <td>1389</td>
+            <td>初级程序员</td>
+            <td>LangChain4j从入门到进阶,适合AI初学者</td>
+            <td>2025-07-10 12:05:30</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>AI大模型开发(Python)</td>
+            <td>LangChain入门</td>
+            <td>199</td>
+            <td>初级程序员</td>
+            <td>LangChain入门,学习该框架如何操作AI大模型</td>
+            <td>2025-07-10 12:05:30</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>AI智能体应用开发(Java)</td>
+            <td>Java核心与AI开发基础</td>
+            <td>28</td>
+            <td>初级程序员</td>
+            <td>Java核心与AI开发基础</td>
+            <td>2025-07-10 12:05:30</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>AI鸿蒙开发</td>
+            <td>前端基础</td>
+            <td>28</td>
+            <td>小白学员</td>
+            <td>前端基础,主要讲解HTML、CSS、JS等</td>
+            <td>2025-07-10 12:05:30</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>AI鸿蒙开发</td>
+            <td>前端基础</td>
+            <td>28</td>
+            <td>小白学员</td>
+            <td>前端基础,主要讲解HTML、CSS、JS等</td>
+            <td>2025-07-10 12:05:30</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>AI大模型开发(Python)</td>
+            <td>数据分析</td>
+            <td>599</td>
+            <td>小白学员</td>
+            <td>基于Python做数据分析的</td>
+            <td>2025-07-10 12:05:30</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>AI智能体应用开发(Java)</td>
+            <td>SpringAI大模型应用开发</td>
+            <td>1990</td>
+            <td>初级程序员</td>
+            <td>SpringAI大模型应用开发</td>
+            <td>2025-07-10 12:05:30</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+ 
+  <script>
+  /*   //  做法一：if循环
+   let arr=[`人`,2,3,4,`羊`,6,7,true,9,10];
+   let search=prompt("请输入要搜索的内容");
+   let len=arr.length;
+   for (let i=0;i<len;i++){
+
+   if(arr[i]==search){
+      console.log(`${search}在数组中的索引为${i}`);
+      break;
+    }else{
+          // 如果遍历到数组最后一个元素仍未找到，输出-1表示未找到
+          if(i==len-1){
+            console.log("-1");
+      }
+    }
+  } */
+ //  做法二：函数
+ let arr=[`人`,2,3,4,`羊`,6,7,true,9,10];
+  let search=prompt("请输入要搜索的内容");
+ function print() {
+  for(let i=0;i<arr.length;i++){
+    if(arr[i]==search){
+      return i;
+    }
+  }
+  return -1;
+ }
+ console.log(print());
+    
+   
+
+  </script>
+
+  
+</body>
+</html>
