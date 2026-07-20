@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let pigGod={//定义一个对象，保存一个人的信息
+      name:"皮嘎的",//姓名
+      age:4,//年龄
+      gender:"神本无相",//性别
+      heigth:1.2,//身高
+      weight:70,//体重
+      //方法
+      sing:function(){//定义一个sing方法，用于唱歌
+        console.log(`我是${this.name}，我正在唱砰砰砰砰`);//输出唱歌的信息
+      },
+      doing(job){//定义一个doing方法，用于做某事
+        console.log(`我是${this.name}，我正在${job}`);//输出做某事的信息
+      }
+         }
+        pigGod.sing();//调用sing方法
+        pigGod.doing("要一百万美刀");//调用doing方法，传递参数"要一百万美刀"
+    
+  </script>
+</body>
+</html>

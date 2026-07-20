@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 获取元素(标签)对象
+  1 根据css选择器获取一个元素对象:document.querySelector(css选择器);
+  2根据css选择器获取多个元素对象:document.querySelectorAll(css选择器) -->
+  <div id="num">1111111</div>
+  <div class="letter">aaaaaa</div>
+  <div class="letter">bbbbbb</div>
+
+  <script>
+    // 1 根据css选择器获取一个元素对象:document.querySelector(css选择器);
+    let num = document.querySelector('#num');
+    console.log(num);
+    // 2根据css选择器获取多个元素对象:document.querySelectorAll(css选择器)
+    let letters = document.querySelectorAll('.letter');
+    console.log(letters);
+    // 3 遍历数组
+    for (let i = 0; i < letters.length; i++) {
+      console.log(letters[i]);
+    }
+  </script>
+</body>
+</html>

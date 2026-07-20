@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例3-根据查询区县列表</title>
+    <link rel="stylesheet" href="./lib/css/bootstrap.min.css">
+    <style>
+        .input-group {
+            width: 600px;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="input-group mb-3">
+            <label class="input-group-text">籍贯</label>
+            <select class="form-select" id="province">
+                <option selected>请选择省份</option>
+            </select>
+            <select class="form-select" id="city">
+                <option selected>请选择城市</option>
+            </select>
+            <select class="form-select" id="area">
+                <option selected>请选择区县</option>
+            </select>
+        </div>
+    </div>
+
+    <script src="./lib/js/bootstrap.bundle.min.js"></script>
+    <script src="./lib/js/axios.min.js"></script>
+    <script>
+            axios.get('https://hmajax.itheima.net/api/province')
+        .then(result => {
+            // 获取省份列表数据
+            const provinceList = result.data.list
+            // 遍历省份列表，拼接option标签
+            let provinceOptions = ''
+            for (let i = 0; i < provinceList.length; i++) {
+                provinceOptions += `<option value="${provinceList[i]}">${provinceList[i]}</option>`
+            }
+            // 将拼接好的option标签添加到省份select中
+            document.querySelector('#province').insertAdjacentHTML('beforeend', provinceOptions)
+        })
+
+        
+        document.querySelector('#province').addEventListener('change', function() {
+            // 获取选中的省份名称
+            const provinceName = this.value
+            // 清空城市和区县select
+            document.querySelector('#city').innerHTML = '<option selected>请选择城市</option>'
+            document.querySelector('#area').innerHTML = '<option selected>请选择区/县</option>'
+            // 如果选择了有效省份，发送请求获取城市信息
+            if (provinceName && provinceName !== '请选择省份') {
+                axios.get('https://hmajax.itheima.net/api/city', {
+                    params: {
+                        pname: provinceName
+                    }
+                }).then(result => {
+                    // 获取城市列表数据
+                    const cityList = result.data.list
+                    // 遍历城市列表，拼接option标签
+                    let cityOptions = ''
+                    for (let i = 0; i < cityList.length; i++) {
+                        cityOptions += `<option value="${cityList[i]}">${cityList[i]}</option>`
+                    }
+                    // 将拼接好的option标签添加到城市select中
+                    document.querySelector('#city').insertAdjacentHTML('beforeend', cityOptions)
+                })
+            }
+        })
+        //------------需求：获取指定城市下的区或者县信息---------------
+        /* 
+        需求 : 用户选择城市后 , 根据用户选择的省份名称和城市名称, 查询区/县信息并展示到页面上
+        1.为省份和城市设置事件监听
+        2.根据省份与城市的名称发送请求，获取区/县列表
+        请求方式：GET
+        请求路径：https://hmajax.itheima.net/api/area
+        请求参数:
+        pname：省份名称
+        cname：城市名称
+        3.遍历列表，将获取的信息拼接为option标签，添加到区县select中
+        4.将区县select添加到页面中
+        示例：
+        
+    "message": "获取地区县成功",
+    "list": [
+        "中山区",
+        "西岗区",
+        "沙河口区",
+    ]
+}    */
+        document.querySelector('#city').addEventListener('change', function() {
+            // 获取选中的城市名称
+            const cityName = this.value
+            // 获取选中的省份名称
+            const provinceName = document.querySelector('#province').value
+            // 清空区县select
+            document.querySelector('#area').innerHTML = '<option selected>请选择区县</option>'
+            // 如果选择了有效城市，发送请求获取区县信息
+            if (cityName && cityName !== '请选择城市') {
+                axios.get('https://hmajax.itheima.net/api/area', {
+                    params: {
+                        pname: provinceName,
+                        cname: cityName
+                    }
+                }).then(result => {
+                    // 获取区县列表数据
+                    const areaList = result.data.list
+                    // 遍历区县列表，拼接option标签
+                    let areaOptions = ''
+                    for (let i = 0; i < areaList.length; i++) {
+                        areaOptions += `<option value="${areaList[i]}">${areaList[i]}</option>`
+                    }
+                    // 将拼接好的option标签添加到区县select中
+                    document.querySelector('#area').insertAdjacentHTML('beforeend', areaOptions)
+                })
+            }
+        })
+
+    </script>
+</body>
+
+</html>

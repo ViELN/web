@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      数组的常用方法：
+        push(item1,item2,..)：将一个或多个元素添加到数组的末尾，并返回新的长度。
+        pop()：删除数组的最后一个元素，并返回该元素的值。
+        splice(start,deleteCount,item1,item2,..)：从数组指定索引start处删除deleteCount个元素。item表示添加的元素。
+      调用格式：数组名.方法名(参数1,参数2,..)
+    */
+   //push(item1,item2,..)：将一个或多个元素添加到数组的末尾，并返回新的长度。
+   let arr =[`卢本伟`,`孙笑川`,`丁真`,2,true,`陈泽彬`]
+   console.log(`更改前：${arr}`);
+   let len = arr.push;
+   arr.push(`侯国玉`,`卡了`)
+   console.log(`更改后：${arr}`);
+   //pop()：删除数组的最后一个元素，并返回该元素的值。
+   arr.pop();
+   console.log(`删除后：${arr}`);
+   //splice(start,deleteCount,item1,item2,..)：从数组指定索引start处删除deleteCount个元素。item表示添加的元素。
+   arr.splice(2,1,`乐乐`);
+   console.log(`删除并添加后：${arr}`);
+
+  </script>
+
+  
+</body>
+</html>

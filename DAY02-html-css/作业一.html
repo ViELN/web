@@ -1,0 +1,81 @@
+<!-- HTML5文档声明：告诉浏览器使用HTML5标准解析页面 -->
+<!DOCTYPE html>
+<!-- 根元素：lang属性指定语言为英语 -->
+<html lang="en">
+<!-- 头部区域：包含页面元信息和样式定义 -->
+<head>
+  <!-- 字符编码设置：UTF-8支持中文和特殊字符显示 -->
+  <meta charset="UTF-8">
+  <!-- 视口设置：适配移动端，宽度等于设备宽度，初始缩放比例为1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 页面标题：显示在浏览器标签页上 -->
+  <title>作业一</title>
+  <!-- 内嵌样式表：定义页面样式 -->
+  <style>
+    /* 表格整体水平居中：上下边距为0，左右边距自动分配 */
+    table {
+      margin: 0 auto;
+      /* 表格边框加粗：设置2px实线黑色边框 */
+      border: 2px solid #000;
+      /* 边框合并：使单元格边框合并为单线 */
+      border-collapse: collapse;
+    }
+    /* 表格头部和单元格文字居中对齐 */
+    th, td {
+      text-align: center;
+    }
+  </style>
+</head>
+<!-- 主体区域：页面实际内容 -->
+<body>
+  <!-- 表格元素：border="1"设置边框，cellspacing="0"去除单元格间距，cellpadding="10"设置内边距 -->
+  <table border="1" cellspacing="0" cellpadding="10">
+    <!-- 表格行：第一行为表头行 -->
+    <tr>
+      <th>编号</th>    <!-- 表头单元格：歌曲编号列 -->
+      <th>标题</th>    <!-- 表头单元格：歌曲标题列 -->
+      <th>歌手</th>    <!-- 表头单元格：歌手名列 -->
+      <th>时长</th>    <!-- 表头单元格：歌曲时长列 -->
+      <th>播放</th>    <!-- 表头单元格：音频播放列 -->
+    </tr>
+    <!-- 表格行：第二行为第一条歌曲数据 -->
+    <tr>
+      <td>1</td>                          <!-- 数据单元格：编号 -->
+      <td>唐人</td>                       <!-- 数据单元格：歌曲标题 -->
+      <td><a href="https://baike.baidu.com/item/%E8%A6%83%E6%B2%90%E6%9B%A6/2582347?fr=aladdin">覃沐曦 </a></td>  <!-- 数据单元格：歌手链接 -->
+      <td> 03:44 </td>                    <!-- 数据单元格：歌曲时长 -->
+      <!-- 音频链接：controls属性显示播放控件 -->
+      <td><audio src="./mp3/唐人.mp3" controls>你的浏览器不支持音频播放</audio></td>
+    </tr>
+    <!-- 表格行：第三行为第二条歌曲数据 -->
+    <tr>
+      <td>2</td>                          <!-- 数据单元格：编号 -->
+      <td>漂洋过海来看你</td>             <!-- 数据单元格：歌曲标题 -->
+      <td><a href="https://baike.baidu.com/item/%E5%91%A8%E6%B7%B1/15089196?fr=aladdin">周深 </a></td>  <!-- 数据单元格：歌手链接 -->
+      <td> 03:03 </td>                    <!-- 数据单元格：歌曲时长 -->
+      <!-- 音频链接：controls属性显示播放控件 -->
+      <td><audio src="./mp3/漂洋过海来看你.mp3" controls>你的浏览器不支持音频播放</audio></td>
+    </tr>
+    <!-- 表格行：第四行为第三条歌曲数据 -->
+    <tr>
+      <td>3</td>                          <!-- 数据单元格：编号 -->
+      <td>小幸运</td>                     <!-- 数据单元格：歌曲标题 -->
+      <td><a href="https://baike.baidu.com/item/%E7%94%B0%E9%A6%A5%E7%94%84?fromModule=lemma_search-box">田馥甄 </a></td>  <!-- 数据单元格：歌手链接 -->
+      <td> 03:03 </td>                    <!-- 数据单元格：歌曲时长 -->
+      <!-- 音频链接：controls属性显示播放控件 -->
+      <td><audio src="./mp3/小幸运.mp3" controls>你的浏览器不支持音频播放</audio></td>
+    </tr>
+    <!-- 表格行：第五行为第四条歌曲数据 -->
+    <tr>
+      <td>4</td>                          <!-- 数据单元格：编号 -->
+      <td>Excitant</td>                   <!-- 数据单元格：歌曲标题 -->
+      <td><a href="https://baike.baidu.com/item/%E6%88%90%E9%A9%B0%E6%B4%8B?fromModule=lemma_search-box">成驰洋 </a></td>  <!-- 数据单元格：歌手链接 -->
+      <td> 03:03 </td>                    <!-- 数据单元格：歌曲时长 -->
+      <!-- 音频链接：controls属性显示播放控件 -->
+      <td><audio src="./mp3/Excitant.mp3" controls>你的浏览器不支持音频播放</audio></td>
+    </tr>
+
+  </table>
+  
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>案例-图书管理</title>
+  <!-- 字体图标 -->
+  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_3736758_vxpb728fcyh.css">
+  <!-- 引入bootstrap.css -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- 核心样式 -->
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+  <!-- 主体区域 -->
+  <div class="container">
+    <!-- 头部标题和添加按钮 -->
+    <div class="top">
+      <h3>图书管理</h3>
+      <!-- 通过data-bs-toggle="modal" data-bs-target=".add-modal"属性展示模态框，add-modal是模态框的类名 -->
+      <!-- <button type="button" class="btn btn-primary plus-btn" data-bs-toggle="modal" data-bs-target=".add-modal"> + 添加 -->
+      <button type="button" class="btn btn-primary plus-btn"> + 添加
+      </button>
+    </div>
+    <!-- 数据列表 -->
+    <table class="table">
+      <thead class="table-light">
+        <tr>
+          <th style="width: 150px;">序号</th>
+          <th>书名</th>
+          <th>作者</th>
+          <th>出版社</th>
+          <th style="width: 180px;">操作</th>
+        </tr>
+      </thead>
+      <tbody class="list">
+        <td>1</td>
+        <td>JavaScript程序设计</td>
+        <td>马特·弗里斯比</td>
+        <td>人民邮电出版社</td>
+        <td>
+          <button type="button" class="btn btn-outline-warning btn-sm">删除</button>
+          <button type="button" class="btn btn-outline-primary btn-sm">编辑</button>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- 新增-弹出框 -->
+  <div class="modal fade add-modal">
+    <!-- 中间白色区域 -->
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header top">
+          <span>添加图书</span>
+          <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body form-wrap">
+          <!-- 新增表单 -->
+          <form class="add-form">
+            <div class="mb-3">
+              <label for="bookname" class="form-label">书名</label>
+              <input type="text" class="form-control bookname" placeholder="请输入书籍名称" name="bookname">
+            </div>
+            <div class="mb-3">
+              <label for="author" class="form-label">作者</label>
+              <input type="text" class="form-control author" placeholder="请输入作者名称" name="author">
+            </div>
+            <div class="mb-3">
+              <label for="publisher" class="form-label">出版社</label>
+              <input type="text" class="form-control publisher" placeholder="请输入出版社名称" name="publisher">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer btn-group">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal"> 取消 </button>
+          <button type="button" class="btn btn-primary add-btn"> 保存 </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 编辑-弹出框 -->
+  <div class="modal fade edit-modal">
+    <!-- 中间白色区域 -->
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header top">
+          <span>编辑图书</span>
+          <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body form-wrap">
+          <!-- 编辑表单 -->
+          <form class="edit-form">
+            <!-- 保存图书的id，这个id不需要使用输入框在页面上展示，所以使用隐藏域，type="hidden" -->
+            <input type="hidden" class="id" name="id">
+            <div class="mb-3">
+              <label for="bookname" class="form-label">书名</label>
+              <input type="text" class="form-control bookname" placeholder="请输入书籍名称" name="bookname">
+            </div>
+            <div class="mb-3">
+              <label for="author" class="form-label">作者</label>
+              <input type="text" class="form-control author" placeholder="请输入作者名称" name="author">
+            </div>
+            <div class="mb-3">
+              <label for="publisher" class="form-label">出版社</label>
+              <input type="text" class="form-control publisher" placeholder="请输入出版社名称" name="publisher">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer btn-group">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal"> 取消 </button>
+          <button type="button" class="btn btn-primary edit-btn"> 修改 </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/axios.min.js"></script>
+  <script src="js/form-serialize.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <!-- 核心逻辑 -->
+  <!-- <script src="./js/index.js"></script> -->
+    <script>
+//--------------------------1. 查询图书列表---------------------------
+let loginUser = 'admin123'
+/* 需求：查询登录成功的用户所属的所有图书信息，展示到表格中
+1.定义方法，查询图书列表
+2.使用axios请求别名的方式获取获取登录成功用户的所有图书信息，
+接口信息：https://s.apifox.cn/apidoc/docs-site/1937884/api-49760214.md
+3.获取结果并遍历
+4.每遍历一次，就将信息拼接一个tr标签
+5.遍历结束将拼接好的tr标签添加到表格中并展示
+
+*/
+// 定义方法，查询图书列表
+function getBookList() {
+  // 使用axios请求别名的方式获取登录成功用户的所有图书信息
+  axios.get('https://hmajax.itheima.net/api/books', {
+    params: {
+      creator: '张三'
+    }
+  }).then(result => {
+    // 获取图书列表数据
+    const bookList = result.data.data
+    // 定义空字符串，用于拼接tr标签
+    let trs = ''
+    // 遍历图书列表
+    bookList.forEach((item, index) => {
+      // 每遍历一次，拼接一个tr标签
+      trs += `
+        <tr>
+          <td>${index + 1}</td>
+          <td>${item.bookname}</td>
+          <td>${item.author}</td>
+          <td>${item.publisher}</td>
+          <td>
+            <button type="button" class="btn btn-outline-warning btn-sm delete-btn" data-id="${item.id}">删除</button>
+            <button type="button" class="btn btn-outline-primary btn-sm edit-btn" data-id="${item.id}">编辑</button>
+          </td>
+        </tr>
+      `
+    })
+    // 将拼接好的tr标签添加到表格中并展示
+    document.querySelector('.list').innerHTML = trs
+  })
+}
+// 页面加载时调用查询图书列表方法
+getBookList()
+//--------------------------2. 新增图书---------------------------
+/* 2.1 显示新增对话框(模态框)-------------
+模态框：https://bootstrap.ac.cn/docs/5.3/components/modal/#via-javascript
+1.获取新增弹出框元素对象，创建模态框对象
+2.给添加按钮绑定单击事件
+3.在事件中，调用模态框对象的show方法，显示新增弹出框
+4.清空对话框中的所有表单数据
+*/
+// 获取新增弹出框元素对象，创建模态框对象
+const addModal = new bootstrap.Modal(document.querySelector('.add-modal'))
+// 给添加按钮绑定单击事件
+document.querySelector('.plus-btn').addEventListener('click', () => {
+  // 调用模态框对象的show方法，显示新增弹出框
+  addModal.show()
+  // 清空对话框中的所有表单数据
+  document.querySelector('.add-form').reset()
+})
+//2.2 保存新图书-----------------------
+/* 
+1.给新增对话框中的保存按钮添加单击事件
+2.在事件函数中获取对话框中的表单数据
+3.使用axios发送请求，将表单数据发送给服务器。接口信息：
+https://s.apifox.cn/apidoc/docs-site/1937884/api-49760213.md
+4.判断是否非空，若为空，则弹出提示信息
+5.保存成功，则隐藏对话框，弹出提示信息并重新查询图书列表
+6.保存失败，则弹出提示信息
+*/
+// 给新增对话框中的保存按钮添加单击事件
+document.querySelector('.add-btn').addEventListener('click', () => {
+  // 获取对话框中的表单数据
+  const form = document.querySelector('.add-form')
+  const data = serialize(form, { hash: true })
+  
+  // 判断是否非空
+  if (!data.bookname || !data.author || !data.publisher) {
+    alert('请填写完整的图书信息')
+    return
+  }
+  
+  // 使用axios发送请求，将表单数据发送给服务器
+  axios.post('https://hmajax.itheima.net/api/books', {
+    ...data,
+    creator: '张三'
+  }).then(result => {
+    // 保存成功，隐藏对话框，弹出提示信息并重新查询图书列表
+    addModal.hide()
+    alert('添加图书成功')
+    getBookList()
+  }).catch(error => {
+    // 保存失败，弹出提示信息
+    alert('添加图书失败，请稍后重试')
+  })
+})
+//--------------------------3. 删除图书---------------------------
+/* 
+需求：根据图书id删除图书
+1.给表格中每行后的删除按钮绑定单击事件
+2.在事件函数中，弹出确认提示框
+3.如果点击确认，则继续删除，否则不删除。
+4.使用axios发送请求，根据图书id删除图书。
+接口信息：https://s.apifox.cn/apidoc/docs-site/1937884/api-49760211.md
+5.删除成功后，弹框显示提示信息，重新查询图书列表，失败也提示错误信息。
+
+*/
+// 给表格中的删除按钮绑定单击事件（使用事件委托）
+document.querySelector('.list').addEventListener('click', (e) => {
+  // 判断点击的是否是删除按钮
+  if (e.target.classList.contains('delete-btn')) {
+    // 获取图书id
+    const id = e.target.dataset.id
+    // 弹出确认提示框
+    if (confirm('确定要删除该图书吗？')) {
+      // 使用axios发送请求，根据图书id删除图书
+      axios.delete(`https://hmajax.itheima.net/api/books/${id}`).then(result => {
+        // 删除成功，弹框显示提示信息，重新查询图书列表
+        alert('删除图书成功')
+        getBookList()
+      }).catch(error => {
+        // 删除失败，提示错误信息
+        alert('删除图书失败，请稍后重试')
+      })
+    }
+  }
+})
+//--------------------------4. 编辑图书---------------------------
+//4.1 回显图书信息---------------------
+/* 
+1.为表单中每行后的编辑按钮绑定单击事件
+2.在事件函数中，弹出编辑对话框并获取当前图书的id
+3.使用axios发送请求，根据id查询图书信息。
+接口信息：https://s.apifox.cn/apidoc/docs-site/1937884/api-49760212.md
+4.将查询到的图书信息回显到编辑对话框中的表单中。
+*/
+// 获取编辑弹出框元素对象，创建模态框对象
+const editModal = new bootstrap.Modal(document.querySelector('.edit-modal'))
+// 为表格中的编辑按钮绑定单击事件（使用事件委托）
+document.querySelector('.list').addEventListener('click', (e) => {
+  // 判断点击的是否是编辑按钮
+  if (e.target.classList.contains('edit-btn')) {
+    // 获取当前图书的id
+    const id = e.target.dataset.id
+    // 弹出编辑对话框
+    editModal.show()
+    // 使用axios发送请求，根据id查询图书信息
+    axios.get(`https://hmajax.itheima.net/api/books/${id}`).then(result => {
+      // 获取查询到的图书信息
+      const book = result.data.data
+      // 将查询到的图书信息回显到编辑对话框中的表单中
+      document.querySelector('.edit-form .id').value = book.id
+      document.querySelector('.edit-form .bookname').value = book.bookname
+      document.querySelector('.edit-form .author').value = book.author
+      document.querySelector('.edit-form .publisher').value = book.publisher
+    })
+  }
+})
+//4.2 保存图书信息，用户修改完毕点击修改按钮, 将最新的数据发送给服务器------------
+/* 
+ 需求：保存修改后的图书信息。
+ 1.给编辑对话框中的保存按钮添加单击事件
+ 2.在事件函数中获取编辑对话框中的表单数据
+ 3.使用axios发送请求，将表单数据发送给服务器,并判断是否为空，若为空，则弹出提示信息
+ 接口信息：https://s.apifox.cn/apidoc/docs-site/1937884/api-49760210.md
+ 4.保存成功，则隐藏对话框，弹出提示信息并重新查询图书列表
+ 5.保存失败，则弹出提示信息
+*/
+// 给编辑对话框中的保存按钮添加单击事件
+document.querySelector('.edit-btn').addEventListener('click', () => {
+  // 获取编辑对话框中的表单数据
+  const form = document.querySelector('.edit-form')
+  const data = serialize(form, { hash: true })
+  
+  // 判断是否非空
+  if (!data.bookname || !data.author || !data.publisher) {
+    alert('请填写完整的图书信息')
+    return
+  }
+  
+  // 使用axios发送请求，将表单数据发送给服务器
+  axios.put(`https://hmajax.itheima.net/api/books/${data.id}`, {
+    bookname: data.bookname,
+    author: data.author,
+    publisher: data.publisher
+  }).then(result => {
+    // 保存成功，隐藏对话框，弹出提示信息并重新查询图书列表
+    editModal.hide()
+    alert('修改图书成功')
+    getBookList()
+  }).catch(error => {
+    // 保存失败，弹出提示信息
+    alert('修改图书失败，请稍后重试')
+  })
+})
+
+    </script>
+
+
+
+
+
+  
+</body>
+
+</html>

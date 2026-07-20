@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例2-根据查询城市列表</title>
+    <link rel="stylesheet" href="./lib/css/bootstrap.min.css">
+    <style>
+        .input-group {
+            width: 500px;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="input-group mb-3">
+            <label class="input-group-text">籍贯</label>
+            <select class="form-select" id="province">
+                <option selected>请选择省份</option>
+            </select>
+            <select class="form-select" id="city">
+                <option selected>请选择城市</option>
+            </select>
+             <select class="form-select" id="area">
+                <option selected>请选择区/县</option>
+            </select>
+        </div>
+    </div>
+
+    <script src="./lib/js/bootstrap.bundle.min.js"></script>
+    <script src="./lib/js/axios.min.js"></script>
+    <script>
+        //------------需求：发送请求获取所有省份信息------------------
+    axios.get('https://hmajax.itheima.net/api/province')
+        .then(result => {
+            // 获取省份列表数据
+            const provinceList = result.data.list
+            // 遍历省份列表，拼接option标签
+            let provinceOptions = ''
+            for (let i = 0; i < provinceList.length; i++) {
+                provinceOptions += `<option value="${provinceList[i]}">${provinceList[i]}</option>`
+            }
+            // 将拼接好的option标签添加到省份select中
+            document.querySelector('#province').insertAdjacentHTML('beforeend', provinceOptions)
+        })
+
+        //------------需求：获取指定省份下的城市信息------------------
+    
+        /* 需求：获取指定省份下的城市信息
+        1.监听省份选择变化
+        2.根据省份名称发送请求获取该省份下的城市信息：
+        接口：GET：https://hmajax.itheima.net/api/city
+        查询参数：pname=省份名称
+        响应数据：城市列表
+        2.遍历城市信息拼接到城市select中    
+        示例：
+        {
+    "message": "获取城市成功",
+    "list": [
+        "沈阳市",
+        "大连市",
+        "鞍山市",
+        "抚顺市",
+ 
+    ]} 
+        */
+        document.querySelector('#province').addEventListener('change', function() {
+            // 获取选中的省份名称
+            const provinceName = this.value
+            // 清空城市和区县select
+            document.querySelector('#city').innerHTML = '<option selected>请选择城市</option>'
+            document.querySelector('#area').innerHTML = '<option selected>请选择区/县</option>'
+            // 如果选择了有效省份，发送请求获取城市信息
+            if (provinceName && provinceName !== '请选择省份') {
+                axios.get('https://hmajax.itheima.net/api/city', {
+                    params: {
+                        pname: provinceName
+                    }
+                }).then(result => {
+                    // 获取城市列表数据
+                    const cityList = result.data.list
+                    // 遍历城市列表，拼接option标签
+                    let cityOptions = ''
+                    for (let i = 0; i < cityList.length; i++) {
+                        cityOptions += `<option value="${cityList[i]}">${cityList[i]}</option>`
+                    }
+                    // 将拼接好的option标签添加到城市select中
+                    document.querySelector('#city').insertAdjacentHTML('beforeend', cityOptions)
+                })
+            }
+        })
+
+
+        //------------需求：获取指定城市下的区或者县信息---------------
+
+    </script>
+</body>
+
+</html>

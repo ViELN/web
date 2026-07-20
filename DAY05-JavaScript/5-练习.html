@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    5秒钟之后跳转至<a href="https://www.itheima.com/">黑马程序员</a>
+    <script>
+    let time=5;
+    let timer=setInterval(() => {
+      time--;
+      console.log(time);
+      if(time==0){
+        clearInterval(timer);
+        location.href="https://www.itheima.com/";
+      }
+    }, 1000);
+    </script>
+  </div>
+</body>
+</html>

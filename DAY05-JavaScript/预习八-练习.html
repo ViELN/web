@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <span id="time">5</span>秒之后自动跳转至<a href="https://www.itheima.com/">黑马程序员</a>首页
+  </div>
+  <script>
+    let time = 5;//倒计时时间
+    let span=document.querySelector("#time");//获取span元素对象
+    setInterval(() => {//需求:倒计时5秒，5秒后自动跳转至黑马程序员首页
+      time--;//倒计时时间减1
+      if(time==0){
+        location.href = "https://www.itheima.com/";//倒计时时间到0，跳转至黑马程序员首页
+      }
+      // console.log(time);//倒计时时间
+      span.innerHTML=time;//将倒计时时间展示到span元素中
+    }, 1000);//1秒执行一次
+    
+  </script>
+</body>
+</html>

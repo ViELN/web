@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <span id="sid">5</span>秒钟之后自动开灯<img src="./images/off.png" alt="">
+  </div>
+  <script>
+/* DOM操作步骤：
+    第一步：获取元素对象
+      1 根据CSS选择器来获取DoM元素，获取匹配到的第一个元素：document.querySelector('选择器')
+      2 根据CSS选择器来获取DOM元素，获取匹配到的所有元素：document.querySelectorAll('选择器')
+    第二步：通过元素对象操作标签的内容、属性、样式等
+      2 操作标签的属性
+        元素对象.html属性名=值;
+*/  
+    let time=5;//倒计时的时间间隔
+    let id=setInterval(() => {
+      time--;//倒计时的时间间隔减1
+      document.querySelector('#sid').innerText=time;//修改span标签的内容为time的值
+     if(time==0){//倒计时的时间间隔为0时，修改img标签的src属性值为on.png
+       document.querySelector('img').src="./images/on.png"; //修改img标签的src属性值为on.png
+       clearInterval(id);//清除定时器
+     }
+    }, 1000);
+  
+  </script>
+</body>
+</html>

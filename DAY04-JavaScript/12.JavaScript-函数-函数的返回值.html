@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+   /* 
+      返回值：函数执行完毕之后返回给调用者的结果。函数是否有返回值取决于需求。
+      注意事项：
+        1、return除了返回结果之外还会结束方法，所以return后面的代码都不会执行。
+        2、函数可以没有return，这种情况函数默认返回值为undefined。
+    */
+// 2、函数可以没有return，这种情况函数默认返回值为undefined。
+ /*    function num(a,b){
+      console.log(a+b);
+    } */
+    // //调用方法
+    // let res=num(1,2);//res=undefined
+    // console.log(`res=${res}`);
+    //1、return除了返回结果之外还会结束方法，所以return后面的代码都不会执行。
+    function print(){
+      for(let i=0;i<10;i++){
+        if(i==7){
+           break  //结束for循环
+          // return ;//提前结束方法，不返回结果
+        }
+        console.log(`i=${i}`);
+      }
+      console.log(`方法执行结束`);
+    }
+    //调用print方法
+    print();
+
+
+
+
+
+
+    
+  </script>
+
+  
+</body>
+</html>

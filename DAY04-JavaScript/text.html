@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作业二：求元素在数组中的索引</title>
+  <style>
+    body {
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      padding: 30px;
+      background-color: #f5f5f5;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    .result {
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .success {
+      color: #28a745;
+    }
+    .error {
+      color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>作业二：求元素在数组中的索引</h1>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    /**
+     * 从数组中查找元素，返回元素在数组中的索引
+     * @param {Array} arr - 要查找的数组
+     * @param {*} target - 要查找的值
+     * @returns {number} - 值在数组中的索引，如果没有找到返回-1
+     */
+    function findIndex(arr, target) {
+      // 使用for循环遍历数组
+      for (var i = 0; i < arr.length; i++) {
+        // 使用if判断当前元素是否等于目标值
+        if (arr[i] === target) {
+          // 如果找到，返回当前索引
+          return i;
+        }
+      }
+      // 如果遍历结束仍未找到，返回-1
+      return -1;
+    }
+
+    // 测试示例
+    var fruits = ['苹果', '香蕉', '橙子', '葡萄', '西瓜'];
+    var numbers = [10, 20, 30, 40, 50];
+    var mixed = ['a', 100, true, null, undefined];
+
+    // 测试1：查找存在的元素
+    var result1 = findIndex(fruits, '橙子');
+    // 测试2：查找不存在的元素
+    var result2 = findIndex(numbers, 60);
+    // 测试3：查找混合类型数组中的元素
+    var result3 = findIndex(mixed, true);
+    // 测试4：查找null值
+    var result4 = findIndex(mixed, null);
+
+    // 输出结果到页面
+    var resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = 
+      '<p><strong>测试数组：</strong>fruits = ["苹果", "香蕉", "橙子", "葡萄", "西瓜"]</p>' +
+      '<p>查找 "橙子" 的索引：<span class="' + (result1 !== -1 ? 'success' : 'error') + '">' + result1 + '</span></p>' +
+      '<hr>' +
+      '<p><strong>测试数组：</strong>numbers = [10, 20, 30, 40, 50]</p>' +
+      '<p>查找 60 的索引：<span class="' + (result2 !== -1 ? 'success' : 'error') + '">' + result2 + '</span> (未找到返回-1)</p>' +
+      '<hr>' +
+      '<p><strong>测试数组：</strong>mixed = ["a", 100, true, null, undefined]</p>' +
+      '<p>查找 true 的索引：<span class="' + (result3 !== -1 ? 'success' : 'error') + '">' + result3 + '</span></p>' +
+      '<p>查找 null 的索引：<span class="' + (result4 !== -1 ? 'success' : 'error') + '">' + result4 + '</span></p>';
+  </script>
+</body>
+</html>

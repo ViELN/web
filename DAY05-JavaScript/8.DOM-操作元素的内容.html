@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="sid">我爱中国</div>
+  <div class="cls">我爱黑马</div>
+  <div class="cls">我爱java</div>
+  <script>
+/* DOM操作步骤：
+    第一步：获取元素对象
+      1 根据CSS选择器来获取DoM元素，获取匹配到的第一个元素：document.querySelector('选择器')
+      2 根据CSS选择器来获取DOM元素，获取匹配到的所有元素：document.querySelectorAll('选择器')
+    第二步：通过元素对象操作标签的内容、属性、样式等
+      1 操作标签的内容
+        1.1 对象.innerText属性：展示文本内容到标签里面，如果文本内容中包含标签，浏览器不会解析标签。【了解】
+        1.2 对象.innerHTML属性：展示文本内容到标签里面，如果文本内容中包含标签，浏览器会解析标签。【常用】 
+        
+  <div id="sid">我爱中国</div>
+  <div class="cls">我爱黑马</div>
+  <div class="cls">我爱黑马</div>
+*/
+    //1 需求：修改第1个div中的内容为"我爱武汉"
+    //第一步：获取元素对象
+    let div=document.querySelector('#sid');
+    //第二步：通过元素对象操作标签的内容
+    // div.innerText="<h1>我爱武汉</h1>";//浏览器不会解析标签
+    div.innerHTML="<h1>我爱武汉</h1>";//浏览器会解析标签
+
+    //2 需求2：在第2个和第3个div后面追加"程序员"
+    let divs=document.querySelectorAll('.cls');
+    for(let i=0;i<divs.length;i++){
+       // divs[i].innerHTML = '程序员'  //设置内容体，会覆盖原有的内容。
+      divs[i].innerHTML+="程序员";//等价于 divs[i].innerHTML = divs[i].innerHTML+'程序员'
+    }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+   /* 
+      数组：是一种数据类型，属于引用数据类型。
+      作用：可以让一个变量同时存储多个数据。
+      定义格式： let 数组名 = [值1,值2,....]
+      访问数组中的元素：
+        取值：数组名[索引]
+        赋值：数组名[索引] = 值;
+        索引：元素在数组中的编号，从0开始。
+      特点：
+        1、数组中可以存任意类型的值。
+        2、数组的长度动态可变。
+  */
+ let arr=[`马嘉祺`,`范丞丞`,123,true,`东北雨姐`]
+ console.log(arr);//[马嘉祺,范丞丞,陈立农,丁程鑫,东北雨姐]
+ console.log(arr[3]);//丁程鑫
+ console.log(arr[5]);//undefined
+ arr[1]=`卢本伟`
+ console.log(arr);//[马嘉祺,卢本伟,陈立农,丁程鑫,东北雨姐]
+
+  </script>
+
+  
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作业3</title>
+    <style>
+        table {
+            /* 设置表格的宽度 */
+            width: 60%;
+            /* 将表格边框合并，消除单元格之间的间距 */
+            border-collapse: collapse;
+            /* 将表格边框间的距离设置为0，确保没有任何间距 */
+            border-spacing: 0;
+            /* 文本居中对齐 */
+            text-align: center;
+            /* 版心居中展示 */
+            margin: auto;
+            /* 距离顶部的外边距 */
+            margin-top: 20px;
+            /* 行高 */
+            line-height: 30px;
+            /* 字体 */
+            font-family: 'Courier New', 华文中宋, monospace;
+        }
+
+        table,
+        tr,
+        th,
+        td {
+            /* 设置表格的边框 */
+            border: 1px solid black;
+        }
+
+        div {
+            /* 文本居中对齐 */
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="font-size: 30px; text-align: center;" id="tb1">课程表</div>
+    <table width="800px" border="1" cellspacing="0" align="center">
+        <tr>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>分数</th>
+            <th>评语</th>
+        </tr>
+        <tr align="center" class="data">
+            <td>001</td>
+            <td>张三</td>
+            <td>90</td>
+            <td>很优秀</td>
+        </tr>
+        <tr align="center" class="data">
+            <td>002</td>
+            <td>李四</td>
+            <td>92</td>
+            <td>优秀</td>
+        </tr>
+        <tr align="center" class="data">
+            <td>003</td>
+            <td>王五</td>
+            <td>83</td>
+            <td>很努力,不错</td>
+        </tr>
+        <tr align="center" class="data">
+            <td>004</td>
+            <td>赵六</td>
+            <td>98</td>
+            <td>666</td>
+        </tr>
+    </table>
+
+    <br>
+</body>
+
+<script>
+    // 需求: 实现鼠标移入隔行换色效果 , 如果是基数行, 背景色为 #FFFFBE, 偶数行为: #C2C2FF ; 鼠标移出之后, 设置为默认的背景色白色 .
+
+    // 获取所有带有 class="data" 的表格行
+    var rows = document.querySelectorAll('.data');
+
+    // 遍历每一行，绑定事件
+    for (var i = 0; i < rows.length; i++) {
+        // 绑定鼠标移入事件 (mouseover)
+        rows[i].addEventListener('mouseover', function() {
+            // 获取当前行的索引（从0开始），加上1变为从1开始的行号
+            var index = Array.prototype.indexOf.call(rows, this) + 1;
+            // 判断是奇数行还是偶数行
+            if (index % 2 === 1) {
+                // 奇数行：背景色设置为 #FFFFBE
+                this.style.backgroundColor = '#FFFFBE';
+            } else {
+                // 偶数行：背景色设置为 #C2C2FF
+                this.style.backgroundColor = '#C2C2FF';
+            }
+        });
+
+        // 绑定鼠标移出事件 (mouseout)
+        rows[i].addEventListener('mouseout', function() {
+            // 鼠标移出时，背景色恢复为白色 #FFFFFF
+            this.style.backgroundColor = '#FFFFFF';
+        });
+    }
+</script>
+
+</html>

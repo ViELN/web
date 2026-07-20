@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <span>5</span>秒钟之后跳转至<a href="https://www.itheima.com/">黑马程序员</a>
+  </div>
+    <script>
+    let time=5;//倒计时的时间间隔
+    let timer=setInterval(() => {
+      time--;//倒计时的时间间隔减1
+      // console.log(time);
+      //需求：修改标签的内容，在页面上显示倒计时效果。
+            //第一步：获取元素对象
+            // let span = document.querySelector('#sid');
+            //第二步：通过元素对象操作标签的内容
+            // span.innerHTML = time;
+            //上述代码合二为一：
+      document.querySelector('span').innerText=time;//修改span标签的内容为time的值
+      if(time==0){//
+        clearInterval(timer);
+        location.href="https://www.itheima.com/";
+      }
+    }, 1000);
+    </script>
+  
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 声明一个空数组用于存储随机数
+    let arr=[];
+    // 循环20次，生成20个随机数
+    for(let i=0;i<20;i++){
+      // 生成[100, 1000)范围内的随机三位整数并添加到数组
+      arr.push(Math.floor(Math.random() * 900) + 100);
+    }console.log(`原始数组${arr}`);
+//方法一：使用数字操作符判断是否为回文数
+    for(i=0;i<arr.length;i++){
+      let gw=parseInt(arr[i]%10);
+      let sw=parseInt(arr[i]/10)%10;
+      let bw=parseInt(arr[i]/100);
+      let gwswbw=Number(gw*100+sw*10+bw);
+      let bwswgw=Number(bw*100+sw*10+gw);
+      if(gwswbw==bwswgw){
+        console.log(`${arr[i]} 是回文数`);
+      }
+      }
+//方法二：使用字符串判断是否为回文数
+/*     for(let i=20;i<arr.length;i++){
+      // 将数字转换为字符串
+      let numStr = arr[i].toString();
+      // 判断是否为回文：正读反读相同
+      let isPalindrome = true;
+      for(let j=0; j<numStr.length/2; j++){
+        if(numStr[j] !== numStr[numStr.length-1-j]){
+          isPalindrome = false;
+          break;
+        }
+      }
+      // 如果是回文数，则输出
+      if(isPalindrome){
+        console.log(arr[i] + " 是回文数");
+      }
+      console.log(`原始数组${arr[i]}`);
+    } */
+
+  </script>
+  
+</body>
+</html>

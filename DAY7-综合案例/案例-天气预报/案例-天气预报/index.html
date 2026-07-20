@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气预报</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 1、首行： 日历、定位、搜索框 -->
+        <!--text-light 白色字体 align-items-center内容垂直居中-->
+        <div class="row text-light align-items-center">
+            <div class="col-3" id="calander">02月05日 农历 正月十五</div>
+            <div class="col-2 offset-4 text-end"> <!-- text-end内容右对齐 -->
+                <img src="imgs/定位.png" width="20px" alt="">
+                <span id="area">武汉市</span>
+            </div>
+            <div class="col-3 search-box">
+                <!-- rounded-pill 圆形边框，胶囊形状 border-0去掉边框 form-control-sm小输入框 search是自己加的样式-->
+                <input type="text" id="search-city"
+                    class="text-light form-control rounded-pill search border-0 form-control" placeholder="搜索城市">
+                <!-- invisible表示隐藏，visible表示显示-->
+                <ul class="list-group search-list invisible">
+                    <!-- <li class="list-group-item list-group-item-action">Cras justo odio</li> -->
+                </ul>
+            </div>
+        </div>
+        <!-- 2、中间气温、空气质量 -->
+        <div class="row text-light align-items-center mt-3">
+            <div class="col-2 temperature">1℃</div> <!-- temperature用于自定义样式 -->
+            <div class="col-10">
+                <!-- rounded圆角 ，air用于自定义样式-->
+                <div class="air rounded">70 良</div>
+                <div>
+                    <img id="weather-img" src="imgs/晴天-line.png" width="20px" alt="">
+                    <span id="weather-wind">晴 西北风 2级</span>
+                </div>
+            </div>
+        </div>
+        <!-- 3、当天天气详情 -->
+        <div class="row text-light align-items-center mt-3" id="today-weather">
+            <div class="col-3">今天：多云-4-8℃</div>
+            <div class="col-2">紫外线：中等</div>
+            <div class="col-2">湿度：31%</div>
+            <div class="col-2">日出：07:20</div>
+            <div class="col-3">日落：17:38</div>
+        </div>
+        <!-- 4、7日天气预报 -->
+        <!-- bg-white白色背景。rounded-3圆角，2表示角度大小。mt-3上外边距-->
+        <div class="row bg-white rounded-3 mt-4">
+            <div class="col-12">
+                <p class="fw-bold mt-2 ms-2">7日内天气预报</p>
+                <!-- d-flex justify-content-around 弹性布局 text-center内容居中-->
+                <div class="d-flex justify-content-around text-center" id="dayForecast">
+                    <div>
+                        <p>今天</p>
+                        <!-- text-muted灰色字体 -->
+                        <p class="text-muted">02月05日</p>
+                        <div><img src="imgs/晴天.png" alt=""></div>
+                        <p>多云</p>
+                        <p>8-4℃</p>
+                        <p class="text-muted">北风&lt;3级</p>
+                    </div>
+                    <div>
+                        <p>今天</p>
+                        <p class="text-muted">02月05日</p>
+                        <div><img src="imgs/晴天.png" alt=""></div>
+                        <p>多云</p>
+                        <p>8-4℃</p>
+                        <p class="text-muted">北风&lt;3级</p>
+                    </div>
+                    <div>
+                        <p>今天</p>
+                        <p class="text-muted">02月05日</p>
+                        <div><img src="imgs/晴天.png" alt=""></div>
+                        <p>多云</p>
+                        <p>8-4℃</p>
+                        <p class="text-muted">北风&lt;3级</p>
+                    </div>
+                    <div>
+                        <p>今天</p>
+                        <p class="text-muted">02月05日</p>
+                        <div><img src="imgs/晴天.png" alt=""></div>
+                        <p>多云</p>
+                        <p>8-4℃</p>
+                        <p class="text-muted">北风&lt;3级</p>
+                    </div>
+                    <div>
+                        <p>今天</p>
+                        <p class="text-muted">02月05日</p>
+                        <div><img src="imgs/晴天.png" alt=""></div>
+                        <p>多云</p>
+                        <p>8-4℃</p>
+                        <p class="text-muted">北风&lt;3级</p>
+                    </div>
+                    <div>
+                        <p>今天</p>
+                        <p class="text-muted">02月05日</p>
+                        <div><img src="imgs/晴天.png" alt=""></div>
+                        <p>多云</p>
+                        <p>8-4℃</p>
+                        <p class="text-muted">北风&lt;3级</p>
+                    </div>
+                    <div>
+                        <p>今天</p>
+                        <p class="text-muted">02月05日</p>
+                        <div><img src="imgs/晴天.png" alt=""></div>
+                        <p>多云</p>
+                        <p>8-4℃</p>
+                        <p class="text-muted">北风&lt;3级</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/axios.min.js"></script>
+    <script>
+        //-----------------------------需求：查询城市----------------------------------
+        /* 需求说明 : 调用服务端接口获取天气数据 , 完成天气预报页面的数据展示
+        1.给输入框绑定事件
+        2.在事件函数中获取输入框中的城市名称
+        3.使用axios发送请求，将城市名称发送给服务器
+        接口信息：
+        GET：https://hmajax.itheima.net/api/weather/city
+        参数：
+        city：城市名称
+        返回响应：
+        {
+    "code": 10000,
+    "message": "查询成功",
+    "data": [
+        {
+            "code": "110100",
+            "name": "北京市 - 北京"
+        },
+        {
+            "code": "120105",
+            "name": "河北区 - 天津"
+        },
+        {
+            "code": "120113",
+            "name": "北辰区 - 天津"
+        },
+        {
+            "code": "130203",
+            "name": "路北区 - 河北省"
+        },
+        4.将返回的城市名遍历，每遍历一个城市就将其拼接在下拉列表中
+        5.展示列表
+        */
+        // 1. 给输入框绑定事件
+        const searchInput = document.querySelector('#search-city')
+        const searchList = document.querySelector('.search-list')
+        
+        // 封装获取城市列表的函数
+        function fetchCityList(cityName = '') {
+            // 3. 使用axios发送请求，将城市名称发送给服务器
+            axios({
+                url: 'https://hmajax.itheima.net/api/weather/city',
+                method: 'GET',
+                params: {
+                    city: cityName
+                }
+            }).then(result => {
+                // 4. 将返回的城市名遍历，每遍历一个城市就将其拼接在下拉列表中
+                const cityData = result.data.data
+                let htmlStr = ''
+                cityData.forEach(item => {
+                    htmlStr += `<li class="list-group-item list-group-item-action" data-code="${item.code}">${item.name}</li>`
+                })
+                searchList.innerHTML = htmlStr
+                
+                // 5. 展示列表
+                searchList.classList.remove('invisible')
+            })
+        }
+        
+        // 点击输入框时，显示所有城市信息
+        searchInput.addEventListener('focus', function() {
+            fetchCityList()
+        })
+        
+        searchInput.addEventListener('input', function() {
+            // 2. 在事件函数中获取输入框中的城市名称
+            const cityName = this.value.trim()
+            
+            // 如果输入为空，显示所有城市
+            if (!cityName) {
+                fetchCityList()
+                return
+            }
+            
+            fetchCityList(cityName)
+        })
+        
+        // 点击列表项时，隐藏列表并填充输入框
+        searchList.addEventListener('click', function(e) {
+            if (e.target.tagName === 'LI') {
+                searchInput.value = e.target.innerText
+                searchList.classList.add('invisible')
+            }
+        })
+        
+        // 点击页面其他地方时隐藏列表
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !searchList.contains(e.target)) {
+                searchList.classList.add('invisible')
+            }
+        })
+        /* 
+        1.给输入框列表绑定点击事件
+        2.使用axios将点击的城市名称发送给服务器
+        接口信息：
+        GET：https://hmajax.itheima.net/api/weather/city
+        参数：
+        city：城市名称
+        返回响应：
+        {
+    "code": 10000,
+    "message": "查询成功",
+    "data": [
+        {
+            "code": "110100",
+            "name": "北京市 - 北京"
+        },
+        {
+            "code": "120105",
+            "name": "河北区 - 天津"
+        },
+        {
+            "code": "120113",
+            "name": "北辰区 - 天津"
+        },
+        {
+            "code": "130203",
+            "name": "路北区 - 河北省"
+        },
+        3.将返回的城市名称展示在输入框中
+        4.获取输入框中的城市名称，使用axios发送请求，将城市名称发送给服务器获取天气数据
+        接口信息：GET：https://hmajax.itheima.net/api/weather
+        参数：city
+        返回响应：
+        {
+    "code": 10000,
+    "message": "查询天气成功",
+    "data": {
+        "date": "2023-02-12",
+        "area": "北京市",
+        "dateShort": "02月12日",
+        "dateLunar": "正月廿二",
+        "temperature": "3",
+        "weather": "霾",
+        "weatherImg": "https://hmajax.itheima.net/weather/mailine.png",
+        "windPower": "1级",
+        "windDirection": "东风",
+        "psPm25Level": "中度",
+        "psPm25": "172",
+        "todayWeather": {
+            "humidity": "69.0",
+            "sunriseTime": "07:12",
+            "sunsetTime": "17:46",
+            "ultraviolet": "最弱",
+            "weather": "雨夹雪",
+            "temDay": "3",
+            "temNight": "-5"
+        },
+        "dayForecast": [
+            {
+                "date": "02月12日",
+                "temDay": "3",
+                "weather": "雨夹雪",
+                "temNight": "-5",
+                "windPower": "<3级",
+                "dateFormat": "今天",
+                "weatherImg": "https://hmajax.itheima.net/weather/yujiaxue.png",
+                "windDirection": "东北风"
+            },
+            {
+                "date": "02月13日",
+                "temDay": "7",
+                "weather": "晴",
+                "temNight": "-4",
+                "windPower": "<3级",
+                "dateFormat": "明天",
+                "weatherImg": "https://hmajax.itheima.net/weather/qing.png",
+                "windDirection": "北风"
+            },
+            {
+                "date": "02月14日",
+                "temDay": "6",
+                "weather": "多云",
+                "temNight": "-5",
+                "windPower": "<3级",
+                "dateFormat": "后天",
+                "weatherImg": "https://hmajax.itheima.net/weather/duoyun.png",
+                "windDirection": "南风"
+            },
+            {
+                "date": "02月15日",
+                "temDay": "4",
+                "weather": "多云",
+                "temNight": "-6",
+                "windPower": "<3级",
+                "dateFormat": "周三",
+                "weatherImg": "https://hmajax.itheima.net/weather/duoyun.png",
+                "windDirection": "南风"
+            },
+            {
+                "date": "02月16日",
+                "temDay": "6",
+                "weather": "晴",
+                "temNight": "-5",
+                "windPower": "<3级",
+                "dateFormat": "周四",
+                "weatherImg": "https://hmajax.itheima.net/weather/qing.png",
+                "windDirection": "南风"
+            },
+            {
+                "date": "02月17日",
+                "temDay": "4",
+                "weather": "多云",
+                "temNight": "0",
+                "windPower": "<3级",
+                "dateFormat": "周五",
+                "weatherImg": "https://hmajax.itheima.net/weather/duoyun.png",
+                "windDirection": "北风"
+            },
+            {
+                "date": "02月18日",
+                "temDay": "6",
+                "weather": "多云",
+                "temNight": "-1",
+                "windPower": "<3级",
+                "dateFormat": "周六",
+                "weatherImg": "https://hmajax.itheima.net/weather/duoyun.png",
+                "windDirection": "东南风"
+            }
+        ]
+    }
+}
+        5.将获取的头部日期，当天天气和空气数据展示在页面上
+        */
+        // 封装渲染天气数据的函数
+        function renderWeatherData(weatherData) {
+            // 更新日历
+            document.querySelector('#calander').innerHTML = `${weatherData.dateShort} 农历 ${weatherData.dateLunar}`
+            
+            // 更新定位城市
+            document.querySelector('#area').innerText = weatherData.area
+            
+            // 更新温度
+            document.querySelector('.temperature').innerText = `${weatherData.temperature}℃`
+            
+            // 更新空气质量
+            document.querySelector('.air').innerText = `${weatherData.psPm25} ${weatherData.psPm25Level}`
+            
+            // 更新天气图标和风向
+            document.querySelector('#weather-img').src = weatherData.weatherImg
+            document.querySelector('#weather-wind').innerText = `${weatherData.weather} ${weatherData.windDirection} ${weatherData.windPower}`
+            
+            // 更新当天天气详情
+            const todayWeather = weatherData.todayWeather
+            document.querySelector('#today-weather').innerHTML = `
+                <div class="col-3">今天：${todayWeather.weather} ${todayWeather.temNight}-${todayWeather.temDay}℃</div>
+                <div class="col-2">紫外线：${todayWeather.ultraviolet}</div>
+                <div class="col-2">湿度：${todayWeather.humidity}%</div>
+                <div class="col-2">日出：${todayWeather.sunriseTime}</div>
+                <div class="col-3">日落：${todayWeather.sunsetTime}</div>
+            `
+            
+            // 更新7日天气预报
+            const dayForecast = weatherData.dayForecast
+            let forecastHtml = ''
+            dayForecast.forEach(item => {
+                forecastHtml += `
+                    <div>
+                        <p>${item.dateFormat}</p>
+                        <p class="text-muted">${item.date}</p>
+                        <div><img src="${item.weatherImg}" alt=""></div>
+                        <p>${item.weather}</p>
+                        <p>${item.temDay}-${item.temNight}℃</p>
+                        <p class="text-muted">${item.windDirection}${item.windPower}</p>
+                    </div>
+                `
+            })
+            document.querySelector('#dayForecast').innerHTML = forecastHtml
+        }
+        
+        // 页面加载时默认显示武汉天气
+        window.addEventListener('load', function() {
+            fetchWeatherData('武汉')
+        })
+        
+        // 给输入框列表绑定点击事件，获取天气数据
+        searchList.addEventListener('click', function(e) {
+            if (e.target.tagName === 'LI') {
+                const cityName = e.target.innerText
+                searchInput.value = cityName
+                searchList.classList.add('invisible')
+                
+                // 获取城市天气数据
+                fetchWeatherData(cityName)
+            }
+        })
+        
+        // 封装获取天气数据的函数
+        function fetchWeatherData(cityName) {
+            axios({
+                url: 'https://hmajax.itheima.net/api/weather',
+                method: 'GET',
+                params: {
+                    city: cityName
+                }
+            }).then(result => {
+                const weatherData = result.data.data
+                renderWeatherData(weatherData)
+            })
+        }
+            //
+
+
+    </script>
+</body>
+
+</html>

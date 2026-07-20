@@ -1,0 +1,168 @@
+<!-- HTML5文档声明：告诉浏览器使用HTML5标准解析页面 -->
+<!DOCTYPE html>
+<!-- 根元素：lang属性指定语言为中文 -->
+<html lang="zh-CN">
+<!-- 头部区域：包含页面元信息和样式定义 -->
+<head>
+  <!-- 字符编码设置：UTF-8支持中文和特殊字符显示 -->
+  <meta charset="UTF-8">
+  <!-- 视口设置：适配移动端，宽度等于设备宽度，初始缩放比例为1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 页面标题：显示在浏览器标签页上 -->
+  <title>新鲜好物</title>
+  <!-- 内嵌样式表：定义页面样式 -->
+  <style>
+    /* 全局选择器：清除所有HTML元素的默认边距、内边距和盒模型 */
+    * {
+      margin: 0;           /* 外边距设为0 */
+      padding: 0;          /* 内边距设为0 */
+      box-sizing: border-box; /* 盒模型设置为border-box，内边距和边框不影响元素宽度 */
+    }
+
+    /* 页面主体样式 */
+    body {
+      padding: 20px;                      /* 页面内边距20像素 */
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif; /* 设置字体，优先使用苹方和微软雅黑 */
+    }
+
+    /* 页面容器样式：控制页面内容宽度和居中 */
+    .container {
+      max-width: 1200px;   /* 最大宽度1200像素 */
+      margin: 0 auto;      /* 上下边距为0，左右边距自动分配，实现水平居中 */
+    }
+
+    /* 标题栏样式：使用flex布局实现两端对齐 */
+    .header {
+      display: flex;              /* 启用flex弹性布局 */
+      justify-content: space-between; /* 两端对齐，标题居左，查看全部居右 */
+      align-items: baseline;      /* 元素底部对齐 */
+      margin-bottom: 20px;        /* 与下方商品区域间距20像素 */
+    }
+
+    /* 标题样式：加粗加大，黑色字体 */
+    .header .title {
+      font-size: 24px;    /* 字体大小24像素 */
+      font-weight: bold;  /* 字体加粗 */
+      color: #333;        /* 字体颜色深灰色 */
+    }
+
+    /* 副标题样式：灰色小字 */
+    .header .subtitle {
+      font-size: 14px;     /* 字体大小14像素 */
+      color: #999;         /* 字体颜色灰色 */
+      margin-left: 12px;   /* 与主标题间距12像素 */
+    }
+
+    /* 查看全部链接样式：灰色文字，无下划线 */
+    .header .view-all {
+      font-size: 14px;         /* 字体大小14像素 */
+      color: #999;             /* 字体颜色灰色 */
+      text-decoration: none;   /* 去除链接默认下划线 */
+    }
+
+    /* 查看全部链接悬浮样式：鼠标悬停时变橙色 */
+    .header .view-all:hover {
+      color: #ff6600;   /* 鼠标悬停时字体变为橙色 */
+    }
+
+    /* 商品容器样式：flex布局水平排列 */
+    .products {
+      display: flex;  /* 启用flex弹性布局 */
+      gap: 15px;      /* 商品卡片之间间距15像素 */
+    }
+
+    /* 商品卡片样式：浅灰绿色背景，圆角 */
+    .product-card {
+      flex: 1;                /* 四个卡片平分容器宽度 */
+      background-color: #f0f5f0; /* 浅灰绿色背景 */
+      border-radius: 8px;     /* 圆角8像素 */
+      overflow: hidden;       /* 隐藏超出部分，配合圆角显示 */
+    }
+
+    /* 商品图片样式：固定高度，保持比例 */
+    .product-card img {
+      width: 100%;      /* 图片宽度占满卡片 */
+      height: 200px;    /* 图片高度固定200像素 */
+      object-fit: cover; /* 保持比例填充，裁剪超出部分 */
+    }
+
+    /* 商品信息区域样式 */
+    .product-info {
+      padding: 12px;    /* 内边距12像素 */
+    }
+
+    /* 商品名称样式：单行显示，超出省略 */
+    .product-name {
+      font-size: 14px;         /* 字体大小14像素 */
+      color: #333;             /* 字体颜色深灰色 */
+      white-space: nowrap;     /* 不换行 */
+      overflow: hidden;        /* 隐藏超出部分 */
+      text-overflow: ellipsis; /* 超出部分显示省略号 */
+      margin-bottom: 8px;      /* 与价格间距8像素 */
+    }
+
+    /* 商品价格样式：橙色加粗 */
+    .product-price {
+      font-size: 16px;   /* 字体大小16像素 */
+      font-weight: bold; /* 字体加粗 */
+      color: #ff6600;   /* 字体颜色橙色 */
+    }
+  </style>
+</head>
+<!-- 主体区域：页面实际内容 -->
+<body>
+  <!-- 页面容器：包裹所有内容，实现居中 -->
+  <div class="container">
+    <!-- 标题栏区域：包含主标题、副标题和查看全部链接 -->
+    <div class="header">
+      <div>
+        <!-- 主标题：新鲜好物 -->
+        <span class="title">新鲜好物</span>
+        <!-- 副标题：新鲜出炉 品质靠谱 -->
+        <span class="subtitle">新鲜出炉 品质靠谱</span>
+      </div>
+      <!-- 查看全部链接 -->
+      <a href="#" class="view-all">查看全部 ></a>
+    </div>
+
+    <!-- 商品列表区域：包含四个商品卡片 -->
+    <div class="products">
+      <!-- 第一个商品卡片 -->
+      <div class="product-card">
+        <img src="./images/新鲜好物1.png" alt="全防水HABU旋钮牛皮鞋">
+        <div class="product-info">
+          <div class="product-name">全防水HABU旋钮牛皮户外徒步鞋</div>
+          <div class="product-price">¥444.00</div>
+        </div>
+      </div>
+
+      <!-- 第二个商品卡片 -->
+      <div class="product-card">
+        <img src="./images/新鲜好物2.png" alt="儿童多色圆领印花短袖">
+        <div class="product-info">
+          <div class="product-name">儿童多色圆领印花短袖T恤纯棉透气</div>
+          <div class="product-price">¥59.00</div>
+        </div>
+      </div>
+
+      <!-- 第三个商品卡片 -->
+      <div class="product-card">
+        <img src="./images/新鲜好物3.png" alt="古法温酒汝瓷酒具套装">
+        <div class="product-info">
+          <div class="product-name">古法温酒汝瓷酒具套装青瓷礼盒装</div>
+          <div class="product-price">¥488.00</div>
+        </div>
+      </div>
+
+      <!-- 第四个商品卡片 -->
+      <div class="product-card">
+        <img src="./images/新鲜好物4.png" alt="2021年春季新品儿童套装">
+        <div class="product-info">
+          <div class="product-name">2021年春季新品，儿童小熊印花套装</div>
+          <div class="product-price">¥59.00</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

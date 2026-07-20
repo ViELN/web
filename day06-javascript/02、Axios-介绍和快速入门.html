@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Axios快速入门</title>
+</head>
+<body>
+  <div id="demo"></div>
+  <button type="button" onclick="load()">获取数据</button>
+
+  
+<!-- 
+    axios:是一个封装了ajax技术的工具，使用该工具发送异步请求访问服务器获取数据代码相对简单。
+    使用步骤：
+      第一步：引入axios的js文件
+      第二步：使用axios相关方法发送异步请求
+*/
+  <!-- 第一步：引入axios的js文件 -->
+    <script src="js/axios.min.js"></script>
+  <script >
+    /* http://hmajax.itheima.net/api/province */
+    
+   /* http://hmajax.itheima.net/api/province */
+    function load() {
+      axios({  //axios()方法用于发送请求
+        method:"get",  //请求方式，常用的是get和post，如果不写默认是get  
+        url:"http://hmajax.itheima.net/api/province",    //请求地址
+      }).then((res)=>{  //then()方法处理请求成功的结果。箭头函数中的res表示响应回来的数据，res中封装的的数据非常多。
+        //第二步：使用axios相关方法发送异步请求
+        // console.log(res); //res= {data: {…}, status: 200, statusText: 'OK', headers: r, config: {…}, …}
+        //观察res中的数据，我们发现服务器响应给页面的结果在res的data属性身上，所以获取服务器响应给页面的结果，只需使用res.data即可
+        console.log(res.data);//.data也可以认为是固定的写法
+        //将响应回来的结果展示到div中
+        document.querySelector(`#demo`).innerHTML=res.data.list;//省份信息在响应结果的list属性身上，所以需要.list获取
+      }).catch((err)=>{  //catch()方法处理请求失败的结果。箭头函数中的err表示请求失败的错误信息。
+        console.log(err);
+      })//.catch()在开发中此处一般不写，将来统一处理。
+      
+    }
+  </script>
+</body>
+
+</html>

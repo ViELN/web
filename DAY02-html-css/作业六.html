@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图书管理系统</title>
+  <style>
+    /* 全局选择器：清除默认边距和内边距 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* 页面容器：占屏幕宽度80%，水平居中 */
+    .container {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    /* 顶栏样式 */
+    .top-bar {
+      background-color: #f5f5f5;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* 系统名称样式 */
+    .top-bar .title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* 退出登录链接样式 */
+    .top-bar .logout {
+      color: #1E98D7;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    /* 搜索表单区域样式 */
+    .search-form {
+      background-color: white;
+      padding: 20px;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border: 1px solid #eee;
+    }
+
+    /* 表单项标签样式 */
+    .search-form label {
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* 文本输入框样式 */
+    .search-form input[type="text"] {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      outline: none;
+      width: 150px;
+    }
+
+    /* 下拉选择框样式 */
+    .search-form select {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      outline: none;
+      width: 120px;
+    }
+
+    /* 查询按钮样式 */
+    .search-form .btn-search {
+      padding: 8px 20px;
+      background-color: #1E98D7;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    /* 清空按钮样式 */
+    .search-form .btn-reset {
+      padding: 8px 20px;
+      background-color: #999;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    /* 表格展示区样式 */
+    .table-section {
+      margin-top: 20px;
+    }
+
+    /* 表格样式 */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    /* 表头单元格样式 */
+    .data-table th {
+      background-color: #f5f5f5;
+      color: #333;
+      padding: 12px;
+      text-align: center;
+      font-weight: bold;
+      border-bottom: 2px solid #ddd;
+    }
+
+    /* 表格数据单元格样式 */
+    .data-table td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    /* 状态标签样式 */
+    .data-table .status-available {
+      color: #52c41a;
+    }
+
+    .data-table .status-borrowed {
+      color: #ff4d4f;
+    }
+
+    /* 编辑按钮样式 */
+    .data-table .btn-edit {
+      padding: 5px 12px;
+      background-color: #52c41a;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+
+    /* 删除按钮样式 */
+    .data-table .btn-delete {
+      padding: 5px 12px;
+      background-color: #ff4d4f;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    /* 表格行悬停效果 */
+    .data-table tbody tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    /* 页脚版权区域样式 */
+    .footer {
+      background-color: #666;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+      font-size: 14px;
+      width:80%;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 顶栏区域 -->
+    <div class="top-bar">
+      <span class="title">图书管理系统</span>
+      <a href="#" class="logout">退出登录</a>
+    </div>
+
+    <!-- 搜索表单区域 -->
+    <div class="search-form">
+      <label for="bookName">书名</label>
+      <input type="text" id="bookName" placeholder="请输入书名">
+      
+      <label for="author">作者</label>
+      <input type="text" id="author" placeholder="请输入作者">
+      
+      <label for="category">分类</label>
+      <select id="category">
+        <option value="">全部</option>
+        <option value="literature">文学</option>
+        <option value="history">历史</option>
+        <option value="science">科技</option>
+        <option value="art">艺术</option>
+        <option value="education">教育</option>
+      </select>
+      
+      <label for="status">状态</label>
+      <select id="status">
+        <option value="">全部</option>
+        <option value="available">可借出</option>
+        <option value="borrowed">已借出</option>
+      </select>
+      
+      <button class="btn-search">查询</button>
+      <button class="btn-reset">清空</button>
+    </div>
+
+    <!-- 表格展示区 -->
+    <div class="table-section">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>图书编号</th>
+            <th>书名</th>
+            <th>作者</th>
+            <th>分类</th>
+            <th>出版社</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>001</td>
+            <td>红楼梦</td>
+            <td>曹雪芹</td>
+            <td>文学</td>
+            <td>人民文学出版社</td>
+            <td><span class="status-available">可借出</span></td>
+            <td>
+              <button class="btn-edit">编辑</button>
+              <button class="btn-delete">删除</button>
+            </td>
+          </tr>
+          <tr>
+            <td>002</td>
+            <td>西游记</td>
+            <td>吴承恩</td>
+            <td>文学</td>
+            <td>中华书局</td>
+            <td><span class="status-borrowed">已借出</span></td>
+            <td>
+              <button class="btn-edit">编辑</button>
+              <button class="btn-delete">删除</button>
+            </td>
+          </tr>
+          <tr>
+            <td>003</td>
+            <td>时间简史</td>
+            <td>霍金</td>
+            <td>科技</td>
+            <td>湖南科学技术出版社</td>
+            <td><span class="status-available">可借出</span></td>
+            <td>
+              <button class="btn-edit">编辑</button>
+              <button class="btn-delete">删除</button>
+            </td>
+          </tr>
+          <tr>
+            <td>004</td>
+            <td>史记</td>
+            <td>司马迁</td>
+            <td>历史</td>
+            <td>中华书局</td>
+            <td><span class="status-available">可借出</span></td>
+            <td>
+              <button class="btn-edit">编辑</button>
+              <button class="btn-delete">删除</button>
+            </td>
+          </tr>
+          <tr>
+            <td>005</td>
+            <td>艺术的故事</td>
+            <td>贡布里希</td>
+            <td>艺术</td>
+            <td>广西美术出版社</td>
+            <td><span class="status-borrowed">已借出</span></td>
+            <td>
+              <button class="btn-edit">编辑</button>
+              <button class="btn-delete">删除</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 页脚版权区域 -->
+  <div class="footer">
+    版权所有 © 2024 图书管理系统
+  </div>
+</body>
+</html>

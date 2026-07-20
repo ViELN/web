@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+     自增自减运算符：++ --
+        1、++ 自增运算符：变量自身的值加1
+        2、-- 自减运算符：变量自身的值减1
+      注意：
+        1、++、--只能操作操作变量，不能操作常量。
+        2、+、--可以在变量前面也可以在变量后面，比如：x++或者++x。
+        3、自增/减运算符单独使用放在前面和后面没有区别，但是参与运算(包括打印和赋值)放前和放后有区别
+          3.1 放在前面：变量先加/减1，再使用(参与运算、赋值、打印)
+          3.2 放在后面：先使用(参与运算、赋值、打印)变量，再加/减1  
+    */
+   let a=10;
+   //单独使用
+    /*    a++;
+      ++a;
+      console.log(a);//11 
+    */
+     /*    
+         a--;
+        --a;
+        console.log(a);//9 
+      */
+     //参与运算
+   /*  let b = a++ +3; 
+    console.log(`b=${b},a=${a}`);//13,11 */
+    let c = ++a +3;
+    console.log(`c=${c},a=${a}`);//14,11
+
+  
+
+  </script>
+</body>
+</html>

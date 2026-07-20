@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+   /*
+      数组的遍历：通过for/while循环获取数组中的每一个元素
+      格式：
+        使用for循环【推荐】
+          for(let i=0;i<数组名.length;i++){  //i表示索引，数组名.length表示数组的长度，索引的最大值=数组的长度-1
+            数组名[i]  //获取数组中的每一个元素
+          }
+        使用while循环:
+          let i=0;
+          while(i<数组名.length){
+            数组名[i]  //获取数组中的每一个元素
+            i++;
+          } 
+    */
+   //使用for循环
+   let arr=[`马嘉祺`,`范丞丞`,123,true,`东北雨姐`]
+   for(let i=0;i<arr.length;i++){
+    console.log(arr[i]);
+   }
+   console.log(`-----------------------`);
+   //使用while循环
+   let i =0;
+   while(i<arr.length){
+    console.log(arr[i]);
+    i++;
+   }
+   
+   
+  </script>
+
+  
+</body>
+</html>

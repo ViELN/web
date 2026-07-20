@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>  
+  /*
+    if分支语句：
+      作用：根据条件判断是否执行某段代码。
+      分类：
+        1 单分支：----适合一种情况的判断
+          if(条件){
+            代码块;
+          }
+          执行流程：先判断条件的结果，如果是true就执行{}中的代码，否则不执行。
+        2 双分支：----适合两种情况的判断
+          if(条件){
+            代码块1;
+          }else{
+            代码块2;
+          }
+        执行流程：先判断条件的结果，如果是true就执行if{}中的代码，否则执行else{}中的代码。
+        3 多分支：----适合多种情况的判断
+          if(条件1){
+            代码块1;
+          }else if(条件2){
+            代码块2;
+          }else if(条件3){
+            代码块3;
+          }
+          ...
+          else{
+            代码块n;
+          }
+          执行流程：
+            1 先判断条件1的结果，如果是true就执行代码1
+            2 否则判断条件2的结果，如果条件2的结果是true就执行代码2
+            3 否则判断条件3的结果，如果条件3的结果是true就执行代码3
+            以此类推
+            4 如果所有条件的结果都是false，就执行else{}中的代码
+    需求：键盘录入成绩，根据输入不同的成绩，返回不同的评价。
+    分数说明：
+        90分以上：优秀
+        70分~90分之间：良好
+        60分~70分之间：及格
+        60分以下：不及格
+  */
+  let score = prompt('请输入成绩');//80
+  if (score >= 90) {
+    alert('优秀');
+  }else if (score >= 70) {
+    alert('良好');
+  }else if (score >= 60) {
+    alert('及格');
+  }else{
+    alert('不及格');
+  }
+   
+  </script>
+</body>
+</html>

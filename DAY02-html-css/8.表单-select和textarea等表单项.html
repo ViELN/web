@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 下拉菜单：select标签内部嵌套option标签，select 是下拉菜单整体，option是下拉菜单的每一项。-->
+<!-- 文本域：textarea标签：可以输入多行内容。rows="n"：最多展示n行，超出会有滚动条。 cols="n" 一行最多显示n个字符，超过自动换行-->
+<!--label标签 – 定义表单项前面的名称(说明文字)，同时增大表单项的点击范围。
+    写法一：label标签的for属性和表单id属性一致，增大表单的点击范围
+    写法二：label标签直接将表单项包裹起来，不需要写for属性-->
+
+  <form action="1.tlias智能学习辅助系统.html" method="get">
+    <!--label标签 – 定义表单项前面的名称(说明文字)，同时增大表单项的点击范围。
+    写法一：label标签的for属性和表单id属性一致，增大表单的点击范围
+    写法二：label标签直接将表单项包裹起来，不需要写for属性-->
+
+    <label for="username">用户名：</label>
+    <input type="text" name="username" id="username" placeholder="请输入用户名"><br>
+    <label for="password">密码：</label>
+    <input type="password" name="password" id="password" placeholder="请输入密码"><br>
+    
+    <label>性别：
+    <input type="radio" name="gender" value="male" checked >男
+    <input type="radio" name="gender" value="female" >女</label>
+    <br>
+    爱好：
+    <input type="checkbox" name="hobby" value="soccer" checked >足球
+    <input type="checkbox" name="hobby" value="basketball" >篮球
+    <input type="checkbox" name="hobby" value="running" >跑步
+    <br>
+    头像：
+    <input type="file" name="avatar" >
+    <br>
+    生日：
+    <input type="date" name="birthday" >
+    <br>
+      <!-- 下拉菜单：select标签内部嵌套option标签，select 是下拉菜单整体，option是下拉菜单的每一项。-->
+    城市：
+    <select name="city" id="">
+      <option value="">请选择城市</option>
+      <option value="beijing">北京</option>
+      <option value="shanghai">上海</option>
+      <option value="guangzhou">广州</option>
+      <option value="shenzhen">深圳</option>
+    </select>
+    <br>
+    <!-- 文本域：textarea标签：可以输入多行内容。rows="n"：最多展示n行，超出会有滚动条。 
+     cols="n" 一行最多显示n个字符，超过自动换行-->
+    个人介绍：
+    <textarea name="introduction" id="" cols="30" rows="10"></textarea>
+    <br>
+    <!-- 提交按钮：点击提交表单数据 -->
+    <button type="submit">登录</button>
+    <!-- 重置按钮：点击重置表单数据 -->
+    <button type="reset">重置</button>
+    <!-- 普通按钮：需结合JavaScript使用 -->
+    <button type="button">普通按钮</button>
+    <br>

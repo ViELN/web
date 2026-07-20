@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+    if分支语句：
+      作用：根据条件判断是否执行某段代码。
+      分类：
+        1 单分支：if(条件){----适合一种情况的判断
+          代码块;
+        }
+          执行流程：先判断条件的结果，如果是true就执行{}中的代码，否则不执行。
+        2 双分支：if(条件){----适合两种情况的判断
+          代码块1;
+        }else{
+          代码块2;
+        }
+        执行流程：先判断条件的结果，如果是true就执行if{}中的代码，否则执行else{}中的代码。
+      需求：用户输入用户名或者密码，如果用户名是刘德华，密码是123456，则提示登录成功，否则提示登录失败。
+    */
+    let username = prompt('请输入用户名');
+    let password = prompt('请输入密码');
+    if (username == '刘德华' && password == '123456') {
+      alert('登录成功');
+    }else{
+      alert('登录失败');
+    }
+ 
+  </script>
+  </body>
+</body>
+</html>

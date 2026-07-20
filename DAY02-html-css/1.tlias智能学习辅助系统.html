@@ -1,0 +1,457 @@
+<!-- HTML5文档声明：告诉浏览器使用HTML5标准解析页面 -->
+<!DOCTYPE html>
+<!-- 根元素：lang属性指定语言为中文，方便搜索引擎识别 -->
+<html lang="zh-CN">
+<!-- 头部区域：包含页面元信息、标题和样式定义 -->
+<head>
+  <!-- 字符编码设置：UTF-8支持中文和特殊字符显示 -->
+  <meta charset="UTF-8">
+  <!-- 视口设置：适配移动端，宽度等于设备宽度，初始缩放比例为1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 页面标题：显示在浏览器标签页上，标识系统名称 -->
+  <title>Tlias智能学习辅助系统</title>
+  <!-- 内嵌样式表：定义页面所有元素的样式 -->
+  <style>
+    /* 全局选择器：清除所有HTML元素的默认边距和内边距 */
+    * {
+      margin: 0;      /* 外边距设为0 */
+      padding: 0;     /* 内边距设为0 */
+    }
+
+    /* 页面容器样式：控制整个页面内容的宽度和居中 */
+    .container {
+      width: 80%;       /* 占屏幕宽度的80% */
+      margin: 0 auto;   /* 上下边距为0，左右边距自动分配，实现水平居中 */
+    }
+
+    /* 顶栏容器样式：使用flex布局实现两端对齐 */
+    .top-bar {
+      background-color: #aaaaaa;  /* 浅灰色背景 */
+      padding: 15px 20px;        /* 上下内边距15px，左右内边距20px */
+      display: flex;              /* 启用flex弹性布局 */
+      justify-content: space-between; /* 两端对齐，标题居左，退出登录居右 */
+      align-items: center;        /* 子元素垂直居中对齐 */
+    }
+
+    /* 标题样式：加大加粗，楷体，白色突出显示 */
+    .top-bar .title {
+      font-size: 24px;                       /* 字体大小24像素 */
+      font-weight: bold;                     /* 字体加粗 */
+      font-family: "KaiTi", "STKaiti", serif; /* 优先使用楷体，兼容不同系统 */
+      color: white;                          /* 字体颜色白色 */
+    }
+
+    /* 退出登录链接样式：白色字体，去除下划线 */
+    .top-bar .logout {
+      color: white;          /* 字体颜色白色 */
+      text-decoration: none; /* 去除链接默认下划线 */
+      font-size: 16px;       /* 字体大小16像素 */
+      transition: all 0.3s ease; /* 所有属性变化使用0.3秒缓动过渡 */
+    }
+
+    /* 退出登录链接悬浮样式：鼠标悬停时的交互效果 */
+    .top-bar .logout:hover {
+      color: #ffcccc;        /* 鼠标悬停时字体变为淡红色 */
+      text-decoration: underline; /* 鼠标悬停时添加下划线 */
+      cursor: pointer;      /* 鼠标指针变为手型，表示可点击 */
+    }
+
+    /* 退出登录图标样式：控制图标大小和对齐方式 */
+    .top-bar .logout img {
+      width: 20px;            /* 图标宽度20像素 */
+      height: 20px;           /* 图标高度20像素 */
+      margin-right: 5px;      /* 图标右侧预留5像素间距 */
+      vertical-align: middle; /* 垂直居中对齐，与文字对齐 */
+      transition: transform 0.3s ease; /* 变换属性使用0.3秒缓动过渡 */
+    }
+
+    /* 退出登录图标悬浮样式：鼠标悬停时图标放大 */
+    .top-bar .logout:hover img {
+      transform: scale(1.1);  /* 鼠标悬停时图标放大1.1倍 */
+    }
+
+    /* 搜索表单区域样式：浅灰色背景，flex布局水平排列 */
+    .search-form {
+      background-color: #f5f5f5;  /* 浅灰色背景 */
+      padding: 20px;              /* 内边距20像素 */
+      margin-top: 20px;           /* 与顶栏间距20像素 */
+      display: flex;              /* 启用flex弹性布局 */
+      align-items: center;        /* 子元素垂直居中对齐 */
+      gap: 15px;                  /* 子元素之间间距15像素 */
+    }
+
+    /* 表单输入区域容器：包裹姓名、性别、职位三个输入项 */
+    .search-form .input-group {
+      display: flex;              /* 启用flex弹性布局 */
+      flex: 1;                    /* 占据剩余全部空间 */
+      gap: 15px;                  /* 输入项之间间距15像素 */
+    }
+
+    /* 单个表单项样式：标签和输入框水平排列 */
+    .search-form .form-item {
+      flex: 1;                    /* 三个输入项平分父容器空间 */
+      display: flex;              /* 启用flex弹性布局 */
+      align-items: center;        /* 标签和输入框垂直居中对齐 */
+    }
+
+    /* 表单项标签样式：固定宽度，深灰色字体 */
+    .search-form .form-item label {
+      width: 60px;                /* 标签宽度固定60像素 */
+      font-size: 14px;            /* 字体大小14像素 */
+      color: #333;                /* 字体颜色深灰色 */
+      margin-right: 8px;          /* 与输入框间距8像素 */
+    }
+
+    /* 文本输入框和下拉选择框统一样式 */
+    .search-form .form-item input,
+    .search-form .form-item select {
+      flex: 1;                    /* 占据剩余空间 */
+      padding: 8px 12px;          /* 内边距：上下8px，左右12px */
+      border: 1px solid #ddd;     /* 灰色边框 */
+      border-radius: 4px;         /* 圆角4像素 */
+      font-size: 14px;            /* 字体大小14像素 */
+      outline: none;              /* 去除默认聚焦时的蓝色边框 */
+    }
+
+    /* 输入框聚焦样式：获得焦点时边框变为蓝色 */
+    .search-form .form-item input:focus,
+    .search-form .form-item select:focus {
+      border-color: #4a90d9;      /* 聚焦时边框变为蓝色 */
+    }
+
+    /* 按钮容器样式：查询和清空按钮水平排列 */
+    .search-form .btn-group {
+      display: flex;              /* 启用flex弹性布局 */
+      gap: 10px;                  /* 按钮之间间距10像素 */
+    }
+
+    /* 查询按钮样式：蓝色背景，白色字体 */
+    .search-form .btn-search {
+      padding: 8px 20px;          /* 内边距：上下8px，左右20px */
+      background-color: #4a90d9;  /* 蓝色背景 */
+      color: white;               /* 白色字体 */
+      border: none;               /* 无边框 */
+      border-radius: 4px;         /* 圆角4像素 */
+      font-size: 14px;            /* 字体大小14像素 */
+      cursor: pointer;            /* 鼠标指针变为手型 */
+      transition: background-color 0.3s ease; /* 背景色变化使用0.3秒缓动 */
+    }
+
+    /* 查询按钮悬浮样式：鼠标悬停时背景色加深 */
+    .search-form .btn-search:hover {
+      background-color: #357abd;  /* 鼠标悬停时蓝色加深 */
+    }
+
+    /* 清空按钮样式：浅灰色背景，白色字体 */
+    .search-form .btn-reset {
+      padding: 8px 20px;          /* 内边距：上下8px，左右20px */
+      background-color: #aaaaaa;  /* 浅灰色背景 */
+      color: white;               /* 白色字体 */
+      border: none;               /* 无边框 */
+      border-radius: 4px;         /* 圆角4像素 */
+      font-size: 14px;            /* 字体大小14像素 */
+      cursor: pointer;            /* 鼠标指针变为手型 */
+      transition: background-color 0.3s ease; /* 背景色变化使用0.3秒缓动 */
+    }
+
+    /* 清空按钮悬浮样式：鼠标悬停时背景色加深 */
+    .search-form .btn-reset:hover {
+      background-color: #999999;  /* 鼠标悬停时灰色加深 */
+    }
+
+    /* 表格区域样式：控制表格与上方元素的间距 */
+    .table-area {
+      margin-top: 20px;           /* 与搜索表单间距20像素 */
+    }
+
+    /* 表格整体样式：白色背景，带阴影效果 */
+    .data-table {
+      width: 100%;                /* 表格宽度占满容器 */
+      border-collapse: collapse;  /* 合并相邻单元格的边框 */
+      font-size: 14px;            /* 字体大小14像素 */
+      background-color: white;    /* 白色背景 */
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 阴影效果，增强立体感 */
+      border: 1px solid #ddd;     /* 表格外边框 */
+    }
+
+    /* 表格头部样式：浅灰色背景，加粗字体 */
+    .data-table thead th {
+      background-color: #f8f9fa;  /* 浅灰色背景 */
+      color: #333;                /* 深灰色字体 */
+      font-weight: bold;          /* 字体加粗 */
+      padding: 12px 15px;         /* 内边距：上下12px，左右15px */
+      text-align: center;         /* 文字居中对齐 */
+      border-bottom: 2px solid #ddd; /* 底部2px边框，分隔表头和表体 */
+      border-right: 1px solid #eee;  /* 右侧垂直分隔线 */
+    }
+
+    /* 表格头部最后一列去除右侧分隔线：避免表格右侧出现双线 */
+    .data-table thead th:last-child {
+      border-right: none;         /* 最后一列无右侧分隔线 */
+    }
+
+    /* 表格单元格样式：居中对齐，带分隔线 */
+    .data-table tbody td {
+      padding: 12px 15px;         /* 内边距：上下12px，左右15px */
+      text-align: center;         /* 文字居中对齐 */
+      border-bottom: 1px solid #eee; /* 底部水平分隔线 */
+      border-right: 1px solid #eee;  /* 右侧垂直分隔线 */
+    }
+
+    /* 表格单元格最后一列去除右侧分隔线：避免表格右侧出现双线 */
+    .data-table tbody td:last-child {
+      border-right: none;         /* 最后一列无右侧分隔线 */
+    }
+
+    /* 表格行悬浮样式：鼠标悬停时背景变色 */
+    .data-table tbody tr:hover {
+      background-color: #f5f5f5;  /* 鼠标悬停时背景变为浅灰色 */
+    }
+
+    /* 头像图片样式：圆形展示 */
+    .data-table .avatar {
+      width: 36px;                /* 头像宽度36像素 */
+      height: 36px;               /* 头像高度36像素 */
+      border-radius: 50%;         /* 圆角50%，实现圆形头像 */
+      object-fit: cover;          /* 保持比例填充，避免变形 */
+      border: 2px solid #ddd;     /* 灰色边框 */
+    }
+
+    /* 操作按钮样式：无背景色，金色字体 */
+    .data-table .action-btn {
+      background: none;           /* 无背景色 */
+      border: none;               /* 无边框 */
+      color: #d4a76a;             /* 金色字体 */
+      font-size: 14px;            /* 字体大小14像素 */
+      cursor: pointer;            /* 鼠标指针变为手型 */
+      padding: 4px 8px;          /* 内边距：上下4px，左右8px */
+      transition: color 0.3s ease; /* 颜色变化使用0.3秒缓动 */
+    }
+
+    /* 操作按钮悬浮样式：鼠标悬停时颜色加深并添加下划线 */
+    .data-table .action-btn:hover {
+      color: #c9944a;             /* 鼠标悬停时金色加深 */
+      text-decoration: underline; /* 鼠标悬停时添加下划线 */
+    }
+
+    /* 操作按钮分隔线样式：灰色竖线分隔编辑和删除 */
+    .data-table .action-divider {
+      color: #ddd;                /* 灰色分隔线 */
+      margin: 0 6px;              /* 左右间距6像素 */
+    }
+
+    /* 页脚版权区域样式：浅灰色背景，白色字体，居中对齐 */
+    .footer {
+      background-color: #aaaaaa;  /* 浅灰色背景，与顶栏一致 */
+      color: white;               /* 字体颜色白色 */
+      text-align: center;         /* 文字居中对齐 */
+      padding: 20px;              /* 内边距20像素 */
+      margin-top: 20px;           /* 与表格区域间距20像素 */
+      font-size: 14px;            /* 字体大小14像素 */
+    }
+
+    /* 页脚版权区域第一行：公司名称 */
+    .footer .company-name {
+      margin-bottom: 5px;         /* 与第二行间距5像素 */
+    }
+
+    /* 页脚版权区域第二行：版权信息 */
+    .footer .copyright {
+      font-size: 12px;            /* 版权信息字体稍小 */
+      opacity: 0.9;               /* 透明度降低，显得更柔和 */
+    }
+  </style>
+</head>
+<!-- 主体区域：页面实际内容 -->
+<body>
+  <!-- 页面容器：包裹所有内容，实现居中 -->
+  <div class="container">
+    <!-- 顶栏区域：包含系统标题和退出登录链接 -->
+    <div class="top-bar">
+      <!-- 标题：系统名称 -->
+      <span class="title">Tlias智能学习辅助系统</span>
+      <!-- 退出登录链接：包含图标和文字，点击可退出登录 -->
+      <a href="#" class="logout"><img src="logout.png" alt="退出登录">退出登录</a>
+    </div>
+
+    <!-- 搜索表单区域：包含查询条件输入框和操作按钮 -->
+    <div class="search-form">
+      <!-- 输入区域：包裹姓名、性别、职位三个输入项 -->
+      <div class="input-group">
+        <!-- 姓名输入框：用于输入查询的姓名 -->
+        <div class="form-item">
+          <label for="name">姓名</label>
+          <input type="text" id="name" placeholder="请输入姓名">
+        </div>
+        <!-- 性别下拉选择：用于选择查询的性别 -->
+        <div class="form-item">
+          <label for="gender">性别</label>
+          <select id="gender">
+            <option value="">请选择性别</option>
+            <option value="male">男</option>
+            <option value="female">女</option>
+          </select>
+        </div>
+        <!-- 职位下拉选择：用于选择查询的职位 -->
+        <div class="form-item">
+          <label for="position">职位</label>
+          <select id="position">
+            <option value="">请选择职位</option>
+            <option value="banzhuren">班主任</option>
+            <option value="jiangshi">讲师</option>
+            <option value="xuegong">学工主管</option>
+            <option value="jiaoyan">教研主管</option>
+            <option value="zixun">咨询师</option>
+          </select>
+        </div>
+      </div>
+      <!-- 按钮区域：包含查询和清空按钮 -->
+      <div class="btn-group">
+        <button class="btn-search">查询</button>
+        <button class="btn-reset">清空</button>
+      </div>
+    </div>
+
+    <!-- 表格展示区域：展示员工数据列表 -->
+    <div class="table-area">
+      <table class="data-table">
+        <!-- 表格头部：定义各列标题 -->
+        <thead>
+          <tr>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>头像</th>
+            <th>职位</th>
+            <th>入职日期</th>
+            <th>最后操作时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <!-- 表格主体：包含8条《笑傲江湖》人物模拟数据 -->
+        <tbody>
+          <!-- 第1条数据：令狐冲 -->
+          <tr>
+            <td>令狐冲</td>
+            <td>男</td>
+            <td><img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=young%20swordsman%20portrait%20ancient%20chinese&image_size=square" alt="令狐冲" class="avatar"></td>
+            <td>讲师</td>
+            <td>2023-01-15</td>
+            <td>2024-06-28 14:30</td>
+            <td>
+              <button class="action-btn">编辑</button>
+              <span class="action-divider">|</span>
+              <button class="action-btn">删除</button>
+            </td>
+          </tr>
+          <!-- 第2条数据：任盈盈 -->
+          <tr>
+            <td>任盈盈</td>
+            <td>女</td>
+            <td><img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=beautiful%20young%20woman%20portrait%20ancient%20chinese&image_size=square" alt="任盈盈" class="avatar"></td>
+            <td>咨询师</td>
+            <td>2023-02-20</td>
+            <td>2024-06-27 09:15</td>
+            <td>
+              <button class="action-btn">编辑</button>
+              <span class="action-divider">|</span>
+              <button class="action-btn">删除</button>
+            </td>
+          </tr>
+          <!-- 第3条数据：岳不群 -->
+          <tr>
+            <td>岳不群</td>
+            <td>男</td>
+            <td><img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=middle%20aged%20man%20scholar%20portrait%20ancient%20chinese&image_size=square" alt="岳不群" class="avatar"></td>
+            <td>教研主管</td>
+            <td>2022-06-01</td>
+            <td>2024-06-26 16:45</td>
+            <td>
+              <button class="action-btn">编辑</button>
+              <span class="action-divider">|</span>
+              <button class="action-btn">删除</button>
+            </td>
+          </tr>
+          <!-- 第4条数据：林平之 -->
+          <tr>
+            <td>林平之</td>
+            <td>男</td>
+            <td><img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=handsome%20young%20man%20noble%20portrait%20ancient%20chinese&image_size=square" alt="林平之" class="avatar"></td>
+            <td>班主任</td>
+            <td>2023-03-10</td>
+            <td>2024-06-25 11:20</td>
+            <td>
+              <button class="action-btn">编辑</button>
+              <span class="action-divider">|</span>
+              <button class="action-btn">删除</button>
+            </td>
+          </tr>
+          <!-- 第5条数据：岳灵珊 -->
+          <tr>
+            <td>岳灵珊</td>
+            <td>女</td>
+            <td><img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=young%20girl%20swordsman%20portrait%20ancient%20chinese&image_size=square" alt="岳灵珊" class="avatar"></td>
+            <td>讲师</td>
+            <td>2023-04-05</td>
+            <td>2024-06-24 15:00</td>
+            <td>
+              <button class="action-btn">编辑</button>
+              <span class="action-divider">|</span>
+              <button class="action-btn">删除</button>
+            </td>
+          </tr>
+          <!-- 第6条数据：左冷禅 -->
+          <tr>
+            <td>左冷禅</td>
+            <td>男</td>
+            <td><img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=elder%20warrior%20leader%20portrait%20ancient%20chinese&image_size=square" alt="左冷禅" class="avatar"></td>
+            <td>学工主管</td>
+            <td>2022-03-15</td>
+            <td>2024-06-23 10:30</td>
+            <td>
+              <button class="action-btn">编辑</button>
+              <span class="action-divider">|</span>
+              <button class="action-btn">删除</button>
+            </td>
+          </tr>
+          <!-- 第7条数据：东方不败 -->
+          <tr>
+            <td>东方不败</td>
+            <td>男</td>
+            <td><img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=mysterious%20androgynous%20warrior%20portrait%20ancient%20chinese&image_size=square" alt="东方不败" class="avatar"></td>
+            <td>教研主管</td>
+            <td>2022-01-20</td>
+            <td>2024-06-22 08:15</td>
+            <td>
+              <button class="action-btn">编辑</button>
+              <span class="action-divider">|</span>
+              <button class="action-btn">删除</button>
+            </td>
+          </tr>
+          <!-- 第8条数据：仪琳 -->
+          <tr>
+            <td>仪琳</td>
+            <td>女</td>
+            <td><img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=young%20nun%20portrait%20ancient%20chinese%20pure&image_size=square" alt="仪琳" class="avatar"></td>
+            <td>咨询师</td>
+            <td>2023-05-18</td>
+            <td>2024-06-21 17:40</td>
+            <td>
+              <button class="action-btn">编辑</button>
+              <span class="action-divider">|</span>
+              <button class="action-btn">删除</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 页脚版权区域：展示公司名称和版权信息 -->
+    <div class="footer">
+      <!-- 第一行：公司全称 -->
+      <div class="company-name">江苏传智播客教育科技股份有限公司</div>
+      <!-- 第二行：版权信息 -->
+      <div class="copyright">版权所有 Copyright 2006-2024 All Rights Reserved</div>
+    </div>
+  </div>
+</body>
+</html>

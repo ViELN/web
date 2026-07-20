@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>HTTP协议-URL查询参数</title>
+</head>
+
+<body>
+  <div id="demo"></div>
+  <button type="button" onclick="load()">获取数据</button>
+  <!-- 第一步：引入axios的js文件 -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    function load() {
+    //方式一：在路径后面拼接参数【适合查询参数少的情况】
+/*     axios.get('https://hmajax.itheima.net/api/city?pname=湖北省').then(result => {
+      console.log(result.data);
+      document.getElementById('demo').innerHTML = result.data.list;
+      // 对服务器返回的数据做后续处理
+}) */
+
+    //方式二 : 使用 params 选项【适合查询参数被封装到对象中的情况】
+    axios.get('https://hmajax.itheima.net/api/city',{params:{pname:'湖北省'}}).then(result => {
+      console.log(result.data);
+      document.getElementById('demo').innerHTML = result.data.list;
+      // 对服务器返回的数据做后续处理
+    })
+    }
+  </script>
+</body>
+
+</html>

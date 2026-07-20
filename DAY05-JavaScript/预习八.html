@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="did">我爱中国</div>
+  <div class="cls">我爱黑马</div>
+  <div class="cls">我爱java</div>
+<!-- 操作标签的内容(开始标签和结束标签之间的内容)第一步:获取元素对象
+第二步:调用元素对象的innerText或者innerHTML属性属性。
+区别:
+对象.innerText属性:展示文本内容到标签里面，如果文本内容中包含标签，浏览器不会解析标签。
+对象.innerHTML属性:展示文本内容到标签里面，如果文本内容中包含标签，浏览器会解析标签。 -->
+<script>
+  //需求:将第一个div中的内容改成"我爱大中国"
+  //第一步:获取元素对象
+  let div=document.getElementById("did");
+  //第二步:调用元素对象的innerText或者innerHTML属性属性。
+  // div.innerText="我爱大中国";
+  // div.innerText="<h1>我爱大中国</h1>";
+  // div.innerHTML="我爱武汉";
+  // div.innerHTML="<h1>我爱武汉</h1>";
+  div.innerHTML ="我爱武汉";//在div的内容后面追加内容"我爱武汉"
+</script>
+</body>
+</html>

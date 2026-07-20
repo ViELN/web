@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用户登录
+
+  </title>
+  <!-- 引入bootstrap.css -->
+  <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+  <!-- 公共 -->
+  <style>
+    html,
+    body {
+      background-color: #EDF0F5;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 520px;
+      height: 540px;
+      background-color: #fff;
+      padding: 60px;
+      box-sizing: border-box;
+    }
+
+    .container h3 {
+      font-weight: 900;
+    }
+  </style>
+  <!-- 表单容器和内容 -->
+  <style>
+    .form_wrap {
+      color: #8B929D !important;
+    }
+
+    .form-text {
+      color: #8B929D !important;
+    }
+  </style>
+  <!-- 提示框样式 -->
+  <style>
+    .alert {
+      transition: .5s;
+      opacity: 0;
+    }
+
+    .alert.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h3>欢迎-登录</h3>
+    <!-- 登录结果-提示框 -->
+    <div class="alert alert-success" role="alert">
+      提示消息
+    </div>
+    <!-- 表单 -->
+    <div class="form_wrap">
+      <form>
+        <div class="mb-3">
+          <label for="username" class="form-label">账号名</label>
+          <input type="text" class="form-control username">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">密码</label>
+          <input type="password" class="form-control password">
+        </div>
+        <button type="button" class="btn btn-primary btn-login"> 登 录 </button>
+      </form>
+    </div>
+  </div>
+  <script src="lib/js/axios.min.js"></script>
+  <script src="lib/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // 需求：点击登录时，用户名和密码长度判断，并提交数据和服务器通信
+    /* 
+      需求：使用所学的技术完成如下登录功能的开发，要求如下：
+          1. 校验用户名和密码不能为空，如果为空就展示错误信息
+          2. 登录成功之后跳转到"个人信息页面"，登录失败展示错误信息
+      实现步骤：
+        1、给登录按钮绑定单击事件，在事件函数中获取用户名和密码框中的内容
+        2、校验用户名和密码不能为空，如果为空就展示错误信息
+        3、校验通过，使用axios发送请求进行登录，接口信息如下：
+            请求方式：POST
+            请求路径：https://hmajax.itheima.net/api/login
+            请求参数：示例如下：
+                {
+                    "username": "黑马no1hello",
+                    "password": "123456"
+                }
+            响应结果：
+            {
+                "code": 10000,
+                "message": "登录成功",
+                "data": {
+                    "username": "黑马no1hello"
+                }
+            }
+        4、判断响应结果，显示登录成功或者失败的提示信息
+        5、如果登录成功，跳转到"个人信息页面.html"页面
+      其它说明信息：
+        1. 显示"登录成功/失败"的提示框需要给div添加show类名
+        2. 成功的提示框为绿色背景，需给div添加alert-success类名
+        3. 错误的提示框为红色背景 , 需给div添加alert-danger类名
+        4. 正确的用户名和密码可以使用昨天《案例-用户注册》页面注册的用户名和密码。
+        5. 登录成功之后需要跳转到《个人信息》页面，并且将登录成功的用户名携带过去。
+       */
+
+    // 获取元素
+    const alertBox = document.querySelector('.alert')
+    //1 给登录按钮绑定单击事件
+    document.querySelector('.btn-login').addEventListener('click', function () {
+      // 获取用户名和密码
+      const username = document.querySelector('.username').value.trim()  //.trim()去掉首尾的空格
+      const password = document.querySelector('.password').value.trim()
+
+      //2 校验用户名和密码不能为空
+      if (username === '' || password === '') {
+        alertBox.textContent = '用户名或密码不能为空'
+        alertBox.classList.remove('alert-success')
+        alertBox.classList.add('alert-danger', 'show')
+        return
+      }
+
+      // 使用axios请求别名post方式发送登录请求
+      axios.post('https://hmajax.itheima.net/api/login', {
+        username: username,
+        password: password
+      }).then(result => {
+        // 登录成功
+        if (result.data.code === 10000) {
+         //展示登录成功的提示信息
+          alertBox.textContent = result.data.message
+          alertBox.classList.remove('alert-danger')
+          alertBox.classList.add('alert-success', 'show')
+          // 跳转到个人信息页面，并携带用户名(可以看到弹框，展示登录成功)
+          setTimeout(() => {
+            location.href = `个人信息页面.html?creator=${result.data.data.username}`
+          }, 1500)
+        } else {
+          console.log('登录失败');
+          // 登录失败(请正确携带必须的参数名和值)
+          alertBox.textContent = result.data.message
+          alertBox.classList.remove('alert-success')
+          alertBox.classList.add('alert-danger', 'show')
+        }
+      }).catch(error => {
+        //展示用户名或者密码错误的异常信息
+        alertBox.textContent = error.response.data.message
+        alertBox.classList.remove('alert-success')
+        alertBox.classList.add('alert-danger', 'show')
+      })
+    })
+  </script>
+</body>
+
+</html>

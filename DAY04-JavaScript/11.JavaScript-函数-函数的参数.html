@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  /*
+    函数的参数：
+      形参：定义方法时，参数列表中的变量叫形参。function 函数名(变量1,变量2,...){}中的(变量1,变量2,...)就是形参
+      实参：调用方法时，传递的参数值叫实参。函数名(值1,值2,...)中的(值1,值2,...)就是实参
+    注意事项：
+      1、定义方法时，形参不是必须要有，根据需求决定要不要定义形参。
+      2、调用方法时，实参的个数和形参的个数可以不一致。建议一致。
+          如果实参过多，那么多余的实参会被忽略。
+          如果实参过少，未赋值的形参默认值是undefined。
+  */
+ // 1、定义方法时，形参不是必须要有，根据需求决定要不要定义形参。
+ function num() {
+  let num=0;
+  for(let i=0;i<10;i++){
+    num+=i;
+  }
+  return num;
+ }
+ console.log(num(7));
+
+/*       2、调用方法时，实参的个数和形参的个数可以不一致。建议一致。
+          如果实参过多，那么多余的实参会被忽略。
+          如果实参过少，未赋值的形参默认值是undefined。
+    */
+   function add(a,b){
+    return a+b;
+   }
+   result=add(1,2);
+   console.log(result);
+   result=add(1,2,3,4,5);
+   console.log(result);
+   result=add(1);
+   console.log(result);
+
+
+  </script>
+
+  
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+    算术运算符：+、-、*、/、%(取余，应用场景：判断一个数是否能被另一个数整除，如果能整除余数就是0)
+    */
+    /* 
+   案例需求： 用户输入商品价格和数量，可以计算出小计，显示到页面中
+    分析：
+    1、弹框让用户输入数据：单价 price、数量num
+      let 变量 = prompt("提示信息");  //声明的变量用来保存用户输入的数据。
+    2、处理数据：：小计=单价＊数量
+    3、输出数据：把结果显示到页面中,注意字符串拼接
+    */
+    // 算术运算符：+、-、*、/、%(取余，应用场景：判断一个数是否能被另一个数整除，如果能整除余数就是0)
+    // console.log(10 + 3);
+    // console.log(10 - 3);
+    // console.log(10 * 3);
+    // console.log(10 / 3);
+    // 使用按位或运算符 | 0 可以实现向下取整（去除小数部分），效果等同于 Math.floor()，但只适用于正数
+    // console.log(10 / 3 | 0);  // 10除以3等于3.333...，| 0 后得到3
+    // console.log(parseInt(10 / 3));  // 10除以3等于3.333...，parseInt() 后得到3
+    // console.log(10 % 3);
+    // console.log("个位：",1234%10); 
+    // console.log("十位：",parseInt(1234/10)%10); 
+    // console.log("百位：",parseInt(1234/100)%10); 
+    // console.log("千位：",parseInt(1234/1000)); 
+   /*  案例需求： 用户输入商品价格和数量，可以计算出小计，显示到页面中
+    分析：
+    1、弹框让用户输入数据：单价 price、数量num
+      let 变量 = prompt("提示信息");  //声明的变量用来保存用户输入的数据。
+    2、处理数据：：小计=单价＊数量
+    3、输出数据：把结果显示到页面中,注意字符串拼接 */
+  /*   let price = prompt("请输入商品单价");
+    let num = prompt("请输入商品数量");
+    let subtotal = price * num;
+    document.write(`商品单价：${price}，商品数量：${num}，商品小计：${subtotal}`); */
+    let price = prompt("请输入商品单价");
+    let num = prompt("请输入商品数量");
+    let subtotal = price * num;
+    console.log(`商品单价：${price}，商品数量：${num}，商品小计：${subtotal}`);
+
+
+
+
+  </script>
+
+  
+</body>
+</html>
